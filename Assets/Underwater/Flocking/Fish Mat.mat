@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Fish Mat
+  m_Shader: {fileID: -6465566751694194690, guid: 0eabd07fb8089c84ca5c4034ebb1aba0,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_2A035E97:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Boolean_750895B7: 1
+    - Boolean_B73F13FE: 1
+    - Vector1_52F5E1CA: 0.1
+    - Vector1_533EF310: 15
+    - Vector1_A39CA036: 3
+    - Vector1_CA07A8C6: -1
+    - Vector1_D78E199B: 0
+    - Vector1_E73D2D4F: 10
+    m_Colors:
+    - Color_3082383A: {r: 0.53301877, g: 0.8244686, b: 1, a: 0}
+    - Color_3DF78203: {r: 0, g: 0.5506482, b: 1, a: 0}
+    - Color_573FE244: {r: 0.7028302, g: 0.8819002, b: 1, a: 0}
+    - Color_7BDD94CC: {r: 1, g: 1, b: 1, a: 0}
+    - Vector2_CBCCF65D: {r: 1, g: 1.53, b: 0, a: 0}
+    - Vector2_E0A923AE: {r: 0.4, g: 0, b: 0, a: 0}
+    - Vector2_F8A9E5BD: {r: 0.03, g: 0.07, b: 0, a: 0}
