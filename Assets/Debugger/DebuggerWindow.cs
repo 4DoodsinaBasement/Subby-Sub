@@ -21,7 +21,7 @@ public class DebuggerWindow : MonoBehaviour
 
     void Start()
     {
-        Debug.Log(" ----- DEBUGGER RUNNING: Press F1 to show window ----- ");
+        Debug.Log(" ----- DEBUGGER RUNNING: Press Left & Right Control to show window ----- ");
 
         isEmpty = (Debugger.elements.Count == 0);
 
