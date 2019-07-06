@@ -6,35 +6,72 @@ using UnityEngine.UI;
 public class DebuggerWindow : MonoBehaviour
 {
     public GameObject debugValuePrefab;
+    public GameObject emptyListPrefab;
 
-    public bool displayed;
+    GameObject emptyListMessage;
 
+    public Color32 unpausedColor;
+    public Color32 pausedColor;
+
+    public bool isEmpty;
+    public bool isDisplayed;
+    public bool pauseDebugging = false;
     int lastObjectPosition = 0;
 
 
-    void Start() { Debug.Log(" ----- DEBUGGER RUNNING: Press F1 to show window ----- "); }
+    void Start()
+    {
+        Debug.Log(" ----- DEBUGGER RUNNING: Press F1 to show window ----- ");
+
+        isEmpty = (Debugger.elements.Count == 0);
+
+        emptyListMessage = Instantiate(emptyListPrefab, new Vector3(0,0,0), Quaternion.identity, transform);
+        emptyListMessage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,0);
+        emptyListMessage.name = "Empty List Object";
+        emptyListMessage.SetActive(isEmpty);
+    }
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F1))
+        CheckControls();
+        CheckDisplay();
+        CheckElements();
+    }
+
+
+    void CheckControls()
+    {
+        if  ((Input.GetKeyDown(KeyCode.LeftControl) && Input.GetKey(KeyCode.RightControl)) || (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.RightControl)))
         {
-            displayed = !displayed;
+            isDisplayed = !isDisplayed;
         }
 
-        GetComponent<Image>().enabled = displayed;
-        foreach (Transform child in transform) { child.gameObject.SetActive(displayed); }
-        
-        if (Debugger.elements.Count == 0)
+        if (isDisplayed && Input.GetKeyDown(KeyCode.P))
         {
-            
+            pauseDebugging = !pauseDebugging;
         }
-        else
+    }
+
+    void CheckDisplay()
+    {
+        GetComponent<Image>().enabled = isDisplayed;
+        emptyListMessage.SetActive(isDisplayed && isEmpty);
+        foreach (Transform child in transform) { child.gameObject.SetActive(isDisplayed); }
+    }
+
+    void CheckElements()
+    {
+        isEmpty = (Debugger.elements.Count == 0);
+        emptyListMessage.SetActive(isDisplayed && isEmpty);
+
+        if (!pauseDebugging)
         {
             foreach (DebugObject debugObject in Debugger.elements)
             {
                 if (transform.Find(debugObject.label) != null)
                 {
                     transform.Find(debugObject.label).Find("Value").GetComponent<Text>().text = string.Format(debugObject.format, debugObject.value);
+                    transform.Find(debugObject.label).Find("Value").GetComponent<Text>().color = unpausedColor;
                 }
                 else
                 {
@@ -42,7 +79,31 @@ public class DebuggerWindow : MonoBehaviour
                     newObject.name = debugObject.label;
                     newObject.transform.Find("Label").GetComponent<Text>().text = debugObject.label;
                     newObject.transform.Find("Value").GetComponent<Text>().text = string.Format(debugObject.format, debugObject.value);
+                    newObject.transform.Find("Value").GetComponent<Text>().color = unpausedColor;
                     newObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,lastObjectPosition);
+                    newObject.SetActive(isDisplayed);
+
+                    lastObjectPosition -= 40;
+                }
+            }
+        }
+        else
+        {
+            foreach (DebugObject debugObject in Debugger.elements)
+            {
+                if (transform.Find(debugObject.label) != null)
+                {
+                    transform.Find(debugObject.label).Find("Value").GetComponent<Text>().color = pausedColor;
+                }
+                else
+                {
+                    GameObject newObject =  Instantiate(debugValuePrefab, new Vector3(0,0,0), Quaternion.identity, transform);
+                    newObject.name = debugObject.label;
+                    newObject.transform.Find("Label").GetComponent<Text>().text = debugObject.label;
+                    newObject.transform.Find("Value").GetComponent<Text>().color = pausedColor;
+                    newObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,lastObjectPosition);
+                    newObject.SetActive(isDisplayed);
+
                     lastObjectPosition -= 40;
                 }
             }

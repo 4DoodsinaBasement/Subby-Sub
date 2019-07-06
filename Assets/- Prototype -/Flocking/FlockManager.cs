@@ -21,7 +21,7 @@ public class FlockManager : MonoBehaviour
     [Range(1.0f, 5.0f)]
     public float rotationSpeed = 3.0f;
 
-
+    float averageSpeed;
     
 
     void Start()
@@ -44,9 +44,18 @@ public class FlockManager : MonoBehaviour
         }
     }
 
-
     void Update()
     {
-        Debugger.Log("Number of Fish", numberOfFish, "{0:0} fish");
+        averageSpeed = 0;
+        foreach (GameObject fish in fishArray) { averageSpeed += fish.GetComponent<FishFlockController>().speed; }
+        averageSpeed /= fishArray.Length;
+
+        Debugging();
+    }
+
+
+    void Debugging()
+    {
+        Debugger.Log("Average Speed", averageSpeed, "{0:0.000}");
     }
 }

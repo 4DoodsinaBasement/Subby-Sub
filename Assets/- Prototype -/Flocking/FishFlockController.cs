@@ -5,7 +5,7 @@ using UnityEngine;
 public class FishFlockController : MonoBehaviour
 {
     public FlockManager manager;
-    float speed;
+    public float speed;
 
 
     void Start()
