@@ -60,6 +60,12 @@ public class FPS_splitscreen : MonoBehaviour
             player.controllers.maps.SetMapsEnabled(false, 0);
             player.controllers.maps.SetMapsEnabled(true, 1);
         }
+        else if (player.GetButton("ExitStation"))
+        {
+            Debug.Log("Exited station");
+            player.controllers.maps.SetMapsEnabled(true, 0);
+            player.controllers.maps.SetMapsEnabled(false, 1);
+        }
         
         UpdateMoveAndLook();
     }
