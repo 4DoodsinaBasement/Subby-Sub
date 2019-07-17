@@ -15,14 +15,17 @@ using Rewired;
     
 public enum PlayerID { Player1 = 0, Player2 = 1, Player3 = 2, Player4 = 3 }
 
+public enum StationType { Walking = 0, Throttle = 1, Buoyancy = 2, Steering = 3 }
+
 
 [RequireComponent(typeof(Rigidbody))]
 public class FPS_splitscreen : MonoBehaviour
 {
 
-
+    #region Rewired Variables
     public PlayerID playerID;
     Player player;
+    #endregion
 
     #region FPS Variables
     private float speed = 5.0f;
@@ -43,7 +46,11 @@ public class FPS_splitscreen : MonoBehaviour
     public Camera m_Camera;
     #endregion
 
-    // Use this for initialization
+    public SubForce stations;
+    public StationType currentStation = StationType.Walking;
+    public GameObject observedStation;
+
+
     private void Start()
     {
         m_Rigid = GetComponent<Rigidbody>();
@@ -51,25 +58,38 @@ public class FPS_splitscreen : MonoBehaviour
         player = ReInput.players.GetPlayer((int)playerID);
     }
 
-    // Update is called once per frame
-    public void Update()
+    public void FixedUpdate()
     {
-        if (player.GetButton("EnterStation"))
+        if (player.GetButtonDown("EnterStation") && observedStation != null)
         {
-            Debug.Log("Entered station");
-            player.controllers.maps.SetMapsEnabled(false, 0);
-            player.controllers.maps.SetMapsEnabled(true, 1);
+            ChangeStation(observedStation.GetComponent<Station>().stationType);
         }
-        else if (player.GetButton("ExitStation"))
+        else if (player.GetButtonDown("ExitStation")) { ChangeStation(StationType.Walking); }
+        else
         {
-            Debug.Log("Exited station");
-            player.controllers.maps.SetMapsEnabled(true, 0);
-            player.controllers.maps.SetMapsEnabled(false, 1);
+            UpdateMoveAndLook();
+            UpdateShipControls();
         }
-        
-        UpdateMoveAndLook();
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Station")
+        {
+            if (other.gameObject.GetComponent<Station>() != null) { observedStation = other.gameObject; }
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Station")
+        {
+            if (other.gameObject.GetComponent<Station>() != null) { observedStation = null; }
+        }
+    }
+
+
+    #region FPS Functions
     void UpdateMoveAndLook()
     {
         m_MovX = player.GetAxis("WalkLR"); /* Input.GetAxis("Horizontal"); */ 
@@ -133,5 +153,38 @@ public class FPS_splitscreen : MonoBehaviour
             Cursor.visible = true;
         }
     }
+    #endregion
 
+    #region Station Controls
+    void ChangeStation(StationType stationID)
+    {
+        currentStation = stationID;
+        Debug.Log("Entered " + stationID.ToString());
+        player.controllers.maps.SetAllMapsEnabled(false);
+        player.controllers.maps.SetMapsEnabled(true, (int)stationID);
+    }
+
+    void UpdateShipControls()
+    {
+        stations.Throttle(player.GetAxis("Throttle"));
+        stations.Buoyancy(player.GetAxis("Buoyancy"));
+        stations.Steering(player.GetAxis("Steering"));
+
+        if (player.GetButtonDown("Kill"))
+        {
+            switch (currentStation)
+            {
+                case StationType.Throttle:
+                    stations.ThrottleZero();
+                    break;
+                case StationType.Buoyancy:
+                    stations.BuoyancyZero();
+                    break;
+                case StationType.Steering:
+                    stations.SteeringZero();
+                    break;
+            }
+        }
+    }
+    #endregion
 }
