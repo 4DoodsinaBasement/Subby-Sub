@@ -54,7 +54,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4229692231702875484}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -111,4 +111,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugValuePrefab: {fileID: 8837805456125884350, guid: 2867d80c4f4cc804b822b7e99817a16d,
     type: 3}
-  displayed: 0
+  emptyListPrefab: {fileID: 8837805456125884350, guid: ae29e3ed9c4875646a933310f4a951d2,
+    type: 3}
+  unpausedColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  pausedColor:
+    serializedVersion: 2
+    rgba: 4293424639
+  isEmpty: 0
+  isDisplayed: 0
+  pauseDebugging: 0

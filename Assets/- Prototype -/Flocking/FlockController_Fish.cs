@@ -2,23 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishFlockController : MonoBehaviour
+public class FlockController_Fish : MonoBehaviour
 {
     public FlockManager manager;
-    float speed;
+    public float speed;
+    float multiplier = 1.0f;
 
 
     void Start()
     {
         
-        speed = Random.Range(manager.minSpeed, manager.maxSpeed);
     }
 
     
     void Update()
     {
         ApplyFlockRules();
-        speed = Mathf.Clamp(Vector3.Distance(this.transform.position, manager.flockTarget.position), manager.minSpeed, manager.maxSpeed);
+        CalculateSpeed();
         transform.Translate(0,0, speed * Time.deltaTime);
     }
 
@@ -40,13 +40,13 @@ public class FishFlockController : MonoBehaviour
             {
                 vCenter += fish.transform.position; neighborGroupSize++;
                 if (currentNeighborDistance < manager.avoidDistance) { vAvoid += (this.transform.position - fish.transform.position); }
-                flockSpeed += fish.GetComponent<FishFlockController>().speed;
+                flockSpeed += fish.GetComponent<FlockController_Fish>().speed;
             }
         }
 
         if (neighborGroupSize > 0)
         {
-            vCenter = vCenter / neighborGroupSize + (manager.flockTarget.position - this.transform.position);
+            vCenter = vCenter / neighborGroupSize + (manager.GetFlockTarget().position - this.transform.position);
             flockSpeed /= neighborGroupSize;
 
             Vector3 direction = (vCenter + vAvoid) - transform.position;
@@ -56,5 +56,20 @@ public class FishFlockController : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), manager.rotationSpeed * Time.deltaTime);
             }
         }
+        else
+        {
+            vCenter = manager.GetFlockTarget().position - this.transform.position;
+        }
+    }
+
+    void CalculateSpeed()
+    {
+        float distanceToTarget = Vector3.Distance(this.transform.position, manager.GetFlockTarget().position);
+        float unclampedSpeed = ((Mathf.Pow(distanceToTarget, 1.5f)) / 5.0f);
+
+        if ((int)Time.time % 3 == 0) { multiplier = Random.Range(1f, 2f); }
+
+        unclampedSpeed *= multiplier;
+        speed = Mathf.Clamp(unclampedSpeed, manager.minSpeed, manager.maxSpeed);
     }
 }

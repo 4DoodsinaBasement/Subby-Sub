@@ -575,11 +575,10 @@ MonoBehaviour:
   fishPrefab: {fileID: 1063472607371430029, guid: 2864e7361b1d03c4494dd906d1c6afeb,
     type: 3}
   numberOfFish: 100
-  flockTarget: {fileID: 0}
-  swimBounds: {x: 5, y: 5, z: 5}
+  spawnBounds: {x: 5, y: 5, z: 5}
   fishArray: []
-  minSpeed: 1
-  maxSpeed: 15
+  minSpeed: 5
+  maxSpeed: 25
   neighborDistance: 10
   avoidDistance: 3
   rotationSpeed: 2
