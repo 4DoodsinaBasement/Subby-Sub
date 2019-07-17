@@ -49,9 +49,6 @@ public class FPS_splitscreen : MonoBehaviour
         m_Rigid = GetComponent<Rigidbody>();
 
         player = ReInput.players.GetPlayer((int)playerID);
-
-        player.controllers.maps.SetMapsEnabled(true, 0);
-        player.controllers.maps.SetMapsEnabled(false, 1);
     }
 
     // Update is called once per frame
@@ -64,7 +61,7 @@ public class FPS_splitscreen : MonoBehaviour
             player.controllers.maps.SetMapsEnabled(true, 1);
         }
         
-
+        UpdateMoveAndLook();
     }
 
     void UpdateMoveAndLook()

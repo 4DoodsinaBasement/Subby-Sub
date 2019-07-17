@@ -185,10 +185,10 @@ MonoBehaviour:
       _descriptiveName: Player1
       _startPlaying: 1
       _defaultJoystickMaps:
-      - _enabled: 0
+      - _enabled: 1
         _categoryId: 0
         _layoutId: 0
-      - _enabled: 1
+      - _enabled: 0
         _categoryId: 1
         _layoutId: 0
       _defaultMouseMaps:
@@ -216,10 +216,10 @@ MonoBehaviour:
       _descriptiveName: Player2
       _startPlaying: 1
       _defaultJoystickMaps:
-      - _enabled: 0
+      - _enabled: 1
         _categoryId: 0
         _layoutId: 0
-      - _enabled: 1
+      - _enabled: 0
         _categoryId: 1
         _layoutId: 0
       _defaultMouseMaps: []
