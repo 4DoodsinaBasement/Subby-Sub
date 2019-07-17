@@ -159,7 +159,7 @@ public class FPS_splitscreen : MonoBehaviour
     void ChangeStation(StationType stationID)
     {
         currentStation = stationID;
-        Debug.Log("Entered " + stationID.ToString());
+        Debug.Log(playerID.ToString() + " entered " + stationID.ToString());
         player.controllers.maps.SetAllMapsEnabled(false);
         player.controllers.maps.SetMapsEnabled(true, (int)stationID);
     }
