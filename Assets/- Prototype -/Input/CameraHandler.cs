@@ -28,7 +28,7 @@ public class CameraHandler : MonoBehaviour
     public Camera cam1, cam2, cam3, cam4;
 
     
-    void Start() { localPlayers = 0; }
+    void Start() { localPlayers = 3; }
 
     void Update()
     {
