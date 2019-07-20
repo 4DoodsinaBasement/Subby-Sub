@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
 
-    
+
 public enum PlayerID { Player1 = 0, Player2 = 1, Player3 = 2, Player4 = 3 }
 
 public enum StationType { Walking = 0, Throttle = 1, Buoyancy = 2, Steering = 3 }
@@ -62,9 +62,11 @@ public class FPS_splitscreen : MonoBehaviour
     {
         if (player.GetButtonDown("EnterStation") && observedStation != null)
         {
+            Debug.Log(observedStation.GetComponent<Station>().stationType);
+            Debug.Log(observedStation.GetComponent<Station>().stationType);
             ChangeStation(observedStation.GetComponent<Station>().stationType);
         }
-        else if (player.GetButtonDown("ExitStation")) { ChangeStation(StationType.Walking); }
+        else if (player.GetButtonDown("ExitStation")) { ChangeStation(0); }
         else
         {
             UpdateMoveAndLook();
@@ -92,8 +94,8 @@ public class FPS_splitscreen : MonoBehaviour
     #region FPS Functions
     void UpdateMoveAndLook()
     {
-        m_MovX = player.GetAxis("WalkLR"); /* Input.GetAxis("Horizontal"); */ 
-        m_MovY = player.GetAxis("WalkFB"); /*Input.GetAxis("Vertical");*/ 
+        m_MovX = player.GetAxis("WalkLR"); /* Input.GetAxis("Horizontal"); */
+        m_MovY = player.GetAxis("WalkFB"); /*Input.GetAxis("Vertical");*/
 
         m_moveHorizontal = transform.right * m_MovX;
         m_movVertical = transform.forward * m_MovY;
@@ -101,7 +103,7 @@ public class FPS_splitscreen : MonoBehaviour
         m_velocity = (m_moveHorizontal + m_movVertical).normalized * speed;
 
         //mouse movement 
-        m_yRot = player.GetAxis("LookLR"); /*Input.GetAxisRaw("Mouse X");*/ 
+        m_yRot = player.GetAxis("LookLR"); /*Input.GetAxisRaw("Mouse X");*/
         m_rotation = new Vector3(0, m_yRot, 0) * m_lookSensitivity;
 
         m_xRot = player.GetAxis("LookUD"); /*Input.GetAxisRaw("Mouse Y");*/
