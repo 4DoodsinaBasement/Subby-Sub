@@ -3,13 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
 
-public static class GamePlayers
-{
-    public static PlayerInfo player1, player2, player3, player4;
+public enum PlayerID { Player1 = 0, Player2 = 1, Player3 = 2, Player4 = 3 }
 
-    static GamePlayers()
+public static class LocalPlayers
+{
+    public static List<PlayerInfo> players = new List<PlayerInfo>();
+
+    static LocalPlayers()
     {
-        player1 = new PlayerInfo(0, PlayerType.FPS);
+        players.Add(new PlayerInfo(PlayerID.Player1, PlayerType.FPS));
+    }
+
+    public static PlayerInfo GetPlayer(PlayerID ID)
+    {
+        foreach (PlayerInfo player in players)
+        if (player.ID == ID) { return player; }
+
+        return null;
     }
 }
 
@@ -17,7 +27,7 @@ public enum PlayerType {Null, Menu, FPS, RTS};
 
 public class PlayerInfo
 {
-    public int ID;
+    public PlayerID ID;
     public Player rewiredPlayer;
     
     PlayerType _type; public PlayerType type
@@ -51,14 +61,14 @@ public class PlayerInfo
         }
     }
 
-    public PlayerInfo(int ID, PlayerType type)
+    public PlayerInfo(PlayerID ID, PlayerType type)
     {
         this.ID = ID;
         this.type = type;
 
-        if (ReInput.players.GetPlayer(ID) != null)
+        if (ReInput.players.GetPlayer((int)ID) != null)
         {
-            rewiredPlayer = ReInput.players.GetPlayer(ID);
+            rewiredPlayer = ReInput.players.GetPlayer((int)ID);
         }
         else
         {

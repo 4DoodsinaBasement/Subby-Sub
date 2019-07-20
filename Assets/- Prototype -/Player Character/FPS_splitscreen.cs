@@ -13,8 +13,6 @@ using UnityEngine;
 using Rewired;
 
 
-public enum PlayerID { Player1 = 0, Player2 = 1, Player3 = 2, Player4 = 3 }
-
 public enum StationType { Walking = 0, Throttle = 1, Buoyancy = 2, Steering = 3 }
 
 

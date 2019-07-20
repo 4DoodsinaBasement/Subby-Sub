@@ -196,10 +196,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6237044838097314576}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 593422ef60c1bf44ebc63cd236777c93, type: 3}
+  m_Script: {fileID: 11500000, guid: f4461a534b5b1b84d9f281d85ad523af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 6237044838565948418}
+  playerCamera: {fileID: 0}
   lookSensitivity: 3
   moveSpeed: 5
   airMovePercent: 0.35

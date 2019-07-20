@@ -40,7 +40,7 @@ public class PlayerFPS : MonoBehaviour
     
     void LoadPlayer()
     {
-        player = GamePlayers.player1;
+        player = LocalPlayers.players[0];
         rb = GetComponent<Rigidbody>();
     }
 
