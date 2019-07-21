@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMaster : MonoBehaviour
 {
-    PlayerID playerID;
+    public PlayerID playerID;
     
     public PlayerInfo LoadPlayer()
     {

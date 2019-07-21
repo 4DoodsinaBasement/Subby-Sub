@@ -840,7 +840,7 @@ GameObject:
   - component: {fileID: 5113288117987221088}
   m_Layer: 0
   m_Name: Steering
-  m_TagString: Station
+  m_TagString: System
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -900,7 +900,7 @@ GameObject:
   - component: {fileID: 5113288118042078907}
   m_Layer: 0
   m_Name: Buoyancy
-  m_TagString: Station
+  m_TagString: System
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2027,7 +2027,7 @@ GameObject:
   - component: {fileID: 5113288118808655987}
   m_Layer: 0
   m_Name: Throttle
-  m_TagString: Station
+  m_TagString: System
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

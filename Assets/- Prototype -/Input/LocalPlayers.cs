@@ -12,6 +12,9 @@ public static class LocalPlayers
     static LocalPlayers()
     {
         players.Add(new PlayerInfo(PlayerID.Player1, PlayerType.Default));
+        players.Add(new PlayerInfo(PlayerID.Player2, PlayerType.Default));
+        players.Add(new PlayerInfo(PlayerID.Player3, PlayerType.Default));
+        players.Add(new PlayerInfo(PlayerID.Player4, PlayerType.Default));
     }
 
     public static PlayerInfo GetPlayer(PlayerID ID)

@@ -385,6 +385,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: '"Sub"'
       objectReference: {fileID: 0}
+    - target: {fileID: 5016730461312369720, guid: 3bddd7fa7cf075b449b49bf62f965452,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5016730461312369715, guid: 3bddd7fa7cf075b449b49bf62f965452,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -393,7 +398,7 @@ PrefabInstance:
     - target: {fileID: 5016730461312369715, guid: 3bddd7fa7cf075b449b49bf62f965452,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 5016730461312369715, guid: 3bddd7fa7cf075b449b49bf62f965452,
         type: 3}
@@ -600,12 +605,12 @@ PrefabInstance:
     - target: {fileID: 7175586076604812466, guid: eedf5585e5d03144da805910b8b8f13b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7175586076604812466, guid: eedf5585e5d03144da805910b8b8f13b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 7175586076604812466, guid: eedf5585e5d03144da805910b8b8f13b,
         type: 3}
@@ -665,6 +670,26 @@ PrefabInstance:
     - target: {fileID: 5641847755588745912, guid: eedf5585e5d03144da805910b8b8f13b,
         type: 3}
       propertyPath: stations
+      value: 
+      objectReference: {fileID: 1902473135}
+    - target: {fileID: 2420621713874859307, guid: eedf5585e5d03144da805910b8b8f13b,
+        type: 3}
+      propertyPath: systems
+      value: 
+      objectReference: {fileID: 1902473135}
+    - target: {fileID: 392640114361978928, guid: eedf5585e5d03144da805910b8b8f13b,
+        type: 3}
+      propertyPath: systems
+      value: 
+      objectReference: {fileID: 1902473135}
+    - target: {fileID: 536701553184952887, guid: eedf5585e5d03144da805910b8b8f13b,
+        type: 3}
+      propertyPath: systems
+      value: 
+      objectReference: {fileID: 1902473135}
+    - target: {fileID: 3703234608621189474, guid: eedf5585e5d03144da805910b8b8f13b,
+        type: 3}
+      propertyPath: systems
       value: 
       objectReference: {fileID: 1902473135}
     m_RemovedComponents: []
