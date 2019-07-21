@@ -109,7 +109,9 @@ public class SubForce : MonoBehaviour
 
     void UpdateSteering()
     {
-        rb.AddTorque(transform.up * (accSteering * rb.mass) * steering);
+        // rb.AddTorque(transform.up * (accSteering * rb.mass) * steering);
+        rb.angularVelocity = new Vector3(0, (accSteering / rb.mass) * steering, 0);
+
     }
     #endregion
 
