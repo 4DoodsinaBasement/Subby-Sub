@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
 
+[RequireComponent(typeof(PlayerMaster))]
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerFPS : MonoBehaviour
 {
@@ -17,7 +18,8 @@ public class PlayerFPS : MonoBehaviour
     
     void Awake()
     {
-        LoadPlayer();
+        player = GetComponent<PlayerMaster>().LoadPlayer();
+        rb = GetComponent<Rigidbody>();
         LockCursor();
     }
 
@@ -38,12 +40,6 @@ public class PlayerFPS : MonoBehaviour
 
     #region Player Input Functions
     
-    void LoadPlayer()
-    {
-        player = LocalPlayers.players[0];
-        rb = GetComponent<Rigidbody>();
-    }
-
     void LockCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;

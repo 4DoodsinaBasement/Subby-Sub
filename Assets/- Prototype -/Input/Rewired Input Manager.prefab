@@ -321,36 +321,36 @@ MonoBehaviour:
         _ruleSets: []
     actions:
     - _id: 0
-      _name: WalkFB
+      _name: MoveVertical
       _type: 0
-      _descriptiveName: Walk FB
-      _positiveDescriptiveName: WalkForward
-      _negativeDescriptiveName: WalkBackward
+      _descriptiveName: Move Vertical
+      _positiveDescriptiveName: MoveForward
+      _negativeDescriptiveName: MoveBackward
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 0
     - _id: 1
-      _name: WalkLR
+      _name: MoveHorizontal
       _type: 0
-      _descriptiveName: Walk LR
-      _positiveDescriptiveName: WalkRight
-      _negativeDescriptiveName: WalkLeft
+      _descriptiveName: Move Horizontal
+      _positiveDescriptiveName: MoveRight
+      _negativeDescriptiveName: MoveLeft
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 0
     - _id: 2
-      _name: LookUD
+      _name: LookVertical
       _type: 0
-      _descriptiveName: Look UD
+      _descriptiveName: Look Vertical
       _positiveDescriptiveName: LookUp
       _negativeDescriptiveName: LookDown
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 0
     - _id: 3
-      _name: LookLR
+      _name: LookHorizontal
       _type: 0
-      _descriptiveName: Look LR
+      _descriptiveName: Look Horizontal
       _positiveDescriptiveName: LookRight
       _negativeDescriptiveName: LookLeft
       _behaviorId: 0
@@ -384,18 +384,18 @@ MonoBehaviour:
       _userAssignable: 1
       _categoryId: 2
     - _id: 7
-      _name: ExitStation
+      _name: ExitSystem
       _type: 1
-      _descriptiveName: Exit Station
+      _descriptiveName: Exit System
       _positiveDescriptiveName: 
       _negativeDescriptiveName: 
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 2
     - _id: 8
-      _name: EnterStation
+      _name: EnterSystem
       _type: 1
-      _descriptiveName: Enter Station
+      _descriptiveName: Enter System
       _positiveDescriptiveName: 
       _negativeDescriptiveName: 
       _behaviorId: 0
@@ -410,6 +410,51 @@ MonoBehaviour:
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 2
+    - _id: 14
+      _name: MoveVertical_ButtonPositive
+      _type: 1
+      _descriptiveName: Move Vertical (Button Positive)
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
+    - _id: 18
+      _name: MoveHorizontal_ButtonPositive
+      _type: 1
+      _descriptiveName: Move Horizontal (Button Positive)
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
+    - _id: 15
+      _name: MoveVertical_ButtonNegative
+      _type: 1
+      _descriptiveName: Move Vertical (Button Negative)
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
+    - _id: 19
+      _name: MoveHorizontal_ButtonNegative
+      _type: 1
+      _descriptiveName: Move Horizontal (Button Negative)
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
+    - _id: 20
+      _name: Jump
+      _type: 1
+      _descriptiveName: Jump
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
     actionCategories:
     - _name: Default
       _descriptiveName: Walk
@@ -424,7 +469,7 @@ MonoBehaviour:
     actionCategoryMap:
       list:
       - categoryId: 0
-        actionIds: 0000000001000000020000000300000008000000
+        actionIds: 000000000e0000000f00000001000000120000001300000002000000030000001400000008000000
       - categoryId: 2
         actionIds: 0400000005000000060000000b00000007000000
     inputBehaviors:
@@ -571,7 +616,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 20
         _elementType: 1
         _elementIdentifierId: 6
         _axisRange: 0
@@ -1458,7 +1503,7 @@ MonoBehaviour:
       customControllerUid: 0
       actionElementMaps:
       - _actionCategoryId: 0
-        _actionId: 0
+        _actionId: 14
         _elementType: 1
         _elementIdentifierId: -1
         _axisRange: 0
@@ -1469,7 +1514,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 1
+        _actionId: 18
         _elementType: 1
         _elementIdentifierId: -1
         _axisRange: 0
@@ -1480,23 +1525,23 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 0
+        _actionId: 15
         _elementType: 1
         _elementIdentifierId: -1
         _axisRange: 0
         _invert: 0
-        _axisContribution: 1
+        _axisContribution: 0
         _keyboardKeyCode: 115
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 1
+        _actionId: 19
         _elementType: 1
         _elementIdentifierId: -1
         _axisRange: 0
         _invert: 0
-        _axisContribution: 1
+        _axisContribution: 0
         _keyboardKeyCode: 97
         _modifierKey1: 0
         _modifierKey2: 0
@@ -1831,7 +1876,7 @@ MonoBehaviour:
     controllerMapLayoutManagerRuleSets: []
     controllerMapEnablerRuleSets: []
     playerIdCounter: 5
-    actionIdCounter: 14
+    actionIdCounter: 21
     actionCategoryIdCounter: 5
     inputBehaviorIdCounter: 1
     mapCategoryIdCounter: 4
