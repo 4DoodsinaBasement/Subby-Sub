@@ -434,7 +434,7 @@ MonoBehaviour:
   accBuoyancy: 3
   maxSpeed_vertical: 3
   deltaSteering: 25
-  accSteering: 1
+  accSteering: 300
   SteeringHeading: {fileID: 5255184619451471360}
   SteeringTurning: {fileID: 5255184619337514295}
   ThrottleSpeed: {fileID: 5255184619569731591}
