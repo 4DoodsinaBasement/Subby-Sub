@@ -87,6 +87,9 @@ public class PlayerFPS : MonoBehaviour
         {
             Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
             
+            Vector3 addVelocityFromSub = Vector3.zero;
+            if (GetComponent<RigidbodyChild>().parentRigidbody != null) { addVelocityFromSub = GetComponent<RigidbodyChild>().parentRigidbody.velocity; }
+            
             if (grounded)
             {
                 localVelocity.x = inputVector3.x * moveSpeed;
@@ -97,8 +100,10 @@ public class PlayerFPS : MonoBehaviour
                 localVelocity.x = (velocityAtJump.x * (1.0f - airMovePercent)) +  ((inputVector3.x * moveSpeed) * airMovePercent);
                 localVelocity.z = (velocityAtJump.z * (1.0f - airMovePercent)) +  ((inputVector3.z * moveSpeed) * airMovePercent);
             }
+
+            addVelocityFromSub.y = 0f;
             
-            rb.velocity = transform.TransformDirection(localVelocity);
+            rb.velocity = (transform.TransformDirection(localVelocity) + addVelocityFromSub);
         }
         
         rb.AddForce(new Vector3 (0, -gravity * rb.mass, 0));
