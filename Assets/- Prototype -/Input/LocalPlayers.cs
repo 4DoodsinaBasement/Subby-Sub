@@ -11,7 +11,10 @@ public static class LocalPlayers
 
     static LocalPlayers()
     {
-        players.Add(new PlayerInfo(PlayerID.Player1, PlayerType.FPS));
+        players.Add(new PlayerInfo(PlayerID.Player1, PlayerType.Default));
+        players.Add(new PlayerInfo(PlayerID.Player2, PlayerType.Default));
+        players.Add(new PlayerInfo(PlayerID.Player3, PlayerType.Default));
+        players.Add(new PlayerInfo(PlayerID.Player4, PlayerType.Default));
     }
 
     public static PlayerInfo GetPlayer(PlayerID ID)
@@ -23,7 +26,9 @@ public static class LocalPlayers
     }
 }
 
-public enum PlayerType {Null, Menu, FPS, RTS};
+
+
+public enum PlayerType { Default = 0, Throttle = 1, Buoyancy = 2, Steering = 3 }
 
 public class PlayerInfo
 {
@@ -33,30 +38,13 @@ public class PlayerInfo
     PlayerType _type; public PlayerType type
     {
         get { return _type; }
-        set 
-        { 
-            switch(value)
+        set
+        {
+            if (rewiredPlayer != null)
             {
-                case PlayerType.Null:
-                    SetAllMapsInCategory("Default", false);
-                    SetAllMapsInCategory("FPS", false);
-                    SetAllMapsInCategory("RTS", false);
-                    break;
-                case PlayerType.Menu:
-                    SetAllMapsInCategory("Default", true);
-                    SetAllMapsInCategory("FPS", false);
-                    SetAllMapsInCategory("RTS", false);
-                    break;
-                case PlayerType.FPS:
-                    SetAllMapsInCategory("Default", true);
-                    SetAllMapsInCategory("FPS", true);
-                    SetAllMapsInCategory("RTS", false);
-                    break;
-                case PlayerType.RTS:
-                    SetAllMapsInCategory("Default", true);
-                    SetAllMapsInCategory("FPS", false);
-                    SetAllMapsInCategory("RTS", true);
-                    break;
+                _type = value;
+                rewiredPlayer.controllers.maps.SetAllMapsEnabled(false);
+                rewiredPlayer.controllers.maps.SetMapsEnabled(true, (int)value);
             }
         }
     }
@@ -70,25 +58,9 @@ public class PlayerInfo
         {
             rewiredPlayer = ReInput.players.GetPlayer((int)ID);
         }
-        else
-        {
-            this.type = PlayerType.Null;
-        }
     }
 
-    void SetAllMapsInCategory(string category, bool setValue)
-    {
-        if (rewiredPlayer != null)
-        {
-            IEnumerable<ControllerMap> categoryMaps = rewiredPlayer.controllers.maps.GetAllMapsInCategory(category);
-
-            foreach (ControllerMap map in categoryMaps)
-            {
-                rewiredPlayer.controllers.maps.GetMap(map.id).enabled = setValue;
-            }
-        }
-    }
-
+    #region GetVector
     public Vector2 GetVector2(string xAxisName, string yAxisName)
     {
         Vector2 vectorToReturn = Vector2.zero;
@@ -124,6 +96,7 @@ public class PlayerInfo
 
         return vectorToReturn;
     }
+    #endregion
 
     #region UpOneLevel Functions
     public float GetAxis(string axisName) { return rewiredPlayer.GetAxis(axisName); }
