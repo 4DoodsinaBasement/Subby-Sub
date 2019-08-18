@@ -6,10 +6,9 @@ using UnityEngine;
 public class PlayerSystemControl : MonoBehaviour
 {
     PlayerInfo player;
+    public SubsystemTemplate observedSystem;
+    public SubsystemTemplate currentSystem;
 
-    public SubForce systems;
-    public GameObject observedSystem;
-    
 
     void Awake()
     {
@@ -18,23 +17,27 @@ public class PlayerSystemControl : MonoBehaviour
 
     void Update()
     {
+
         if (player.GetButtonDown("EnterSystem") && observedSystem != null)
         {
-            player.type = observedSystem.GetComponent<SubSystem>().stationType;
-            Debug.Log(player.ID.ToString() + " entering " + player.type);
+            EnterSystem();
         }
-        else if (player.GetButtonDown("ExitSystem")) { player.type = PlayerType.Default; }
         else
         {
-            UpdateShipControls();
+            SendInputToSubSystem();
         }
     }
 
+    public void EnterSystem() { player.type = PlayerType.SubSystem; currentSystem = observedSystem; }
+    public void ExitSystem() { player.type = PlayerType.Default; currentSystem = null; }
+
     void OnTriggerEnter(Collider other)
     {
+
         if (other.gameObject.tag == "System")
         {
-            if (other.gameObject.GetComponent<SubSystem>() != null) { observedSystem = other.gameObject; }
+            Debug.Log(other.name);
+            if (other.gameObject.GetComponent<SubsystemTemplate>() != null) { observedSystem = other.GetComponent<SubsystemTemplate>(); }
         }
     }
 
@@ -42,32 +45,77 @@ public class PlayerSystemControl : MonoBehaviour
     {
         if (other.gameObject.tag == "System")
         {
-            if (other.gameObject.GetComponent<SubSystem>() != null) { observedSystem = null; }
+            if (other.gameObject.GetComponent<SubsystemTemplate>() != null) { observedSystem = null; }
         }
     }
 
-    #region System Controls
+    #region Inputs
 
-    void UpdateShipControls()
+    void SendInputToSubSystem()
     {
-        systems.Throttle(player.GetAxis("Throttle"));
-        systems.Buoyancy(player.GetAxis("Buoyancy"));
-        systems.Steering(player.GetAxis("Steering"));
-
-        if (player.GetButtonDown("Kill"))
+        if (currentSystem != null)
         {
-            switch (player.type)
+            currentSystem.LeftStickX(player.GetAxis("LeftStickX"));
+            currentSystem.LeftStickY(player.GetAxis("LeftStickY"));
+            currentSystem.RightStickX(player.GetAxis("RightStickX"));
+            currentSystem.RightStickY(player.GetAxis("RightStickY"));
+
+            if (player.GetButton("LeftStickClick")) { currentSystem.LeftStickClick(); }
+            if (player.GetButtonUp("LeftStickClick")) { currentSystem.LeftStickClick_Up(); }
+            if (player.GetButtonDown("LeftStickClick")) { currentSystem.LeftStickClick_Down(); }
+            if (player.GetButton("RightStickClick")) { currentSystem.RightStickClick(); }
+            if (player.GetButtonUp("RightStickClick")) { currentSystem.RightStickClick_Up(); }
+            if (player.GetButtonDown("RightStickClick")) { currentSystem.RightStickClick_Down(); }
+
+            if (player.GetButton("ButtonNorth")) { currentSystem.ButtonNorth(); }
+            if (player.GetButtonUp("ButtonNorth")) { currentSystem.ButtonNorth_Up(); }
+            if (player.GetButtonDown("ButtonNorth")) { currentSystem.ButtonNorth_Down(); }
+            if (player.GetButton("ButtonSouth")) { currentSystem.ButtonSouth(); }
+            if (player.GetButtonUp("ButtonSouth")) { currentSystem.ButtonSouth_Up(); }
+            if (player.GetButtonDown("ButtonSouth")) { currentSystem.ButtonSouth_Down(); }
+            if (player.GetButton("ButtonEast")) { currentSystem.ButtonEast(); }
+            if (player.GetButtonUp("ButtonEast")) { currentSystem.ButtonEast_Up(); }
+            if (player.GetButtonDown("ButtonEast")) { currentSystem.ButtonEast_Down(); }
+            if (player.GetButton("ButtonWest")) { currentSystem.ButtonWest(); }
+            if (player.GetButtonUp("ButtonWest")) { currentSystem.ButtonWest_Up(); }
+            if (player.GetButtonDown("ButtonWest"))
             {
-                case PlayerType.Throttle:
-                    systems.ThrottleZero();
-                    break;
-                case PlayerType.Buoyancy:
-                    systems.BuoyancyZero();
-                    break;
-                case PlayerType.Steering:
-                    systems.SteeringZero();
-                    break;
+                currentSystem.ButtonWest_Down();
+                ExitSystem();
             }
+
+            if (player.GetButton("LeftTrigger")) { currentSystem.LeftTrigger(); }
+            if (player.GetButtonUp("LeftTrigger")) { currentSystem.LeftTrigger_Up(); }
+            if (player.GetButtonDown("LeftTrigger")) { currentSystem.LeftTrigger_Down(); }
+            if (player.GetButton("RightTrigger")) { currentSystem.RightTrigger(); }
+            if (player.GetButtonUp("RightTrigger")) { currentSystem.RightTrigger_Up(); }
+            if (player.GetButtonDown("RightTrigger")) { currentSystem.RightTrigger_Down(); }
+            if (player.GetButton("LeftBumper")) { currentSystem.LeftBumper(); }
+            if (player.GetButtonUp("LeftBumper")) { currentSystem.LeftBumper_Up(); }
+            if (player.GetButtonDown("LeftBumper")) { currentSystem.LeftBumper_Down(); }
+            if (player.GetButton("RightBumper")) { currentSystem.RightBumper(); }
+            if (player.GetButtonUp("RightBumper")) { currentSystem.RightBumper_Up(); }
+            if (player.GetButtonDown("RightBumper")) { currentSystem.RightBumper_Down(); }
+
+            if (player.GetButton("PadNorth")) { currentSystem.PadNorth(); }
+            if (player.GetButtonUp("PadNorth")) { currentSystem.PadNorth_Up(); }
+            if (player.GetButtonDown("PadNorth")) { currentSystem.PadNorth_Down(); }
+            if (player.GetButton("PadSouth")) { currentSystem.PadSouth(); }
+            if (player.GetButtonUp("PadSouth")) { currentSystem.PadSouth_Up(); }
+            if (player.GetButtonDown("PadSouth")) { currentSystem.PadSouth_Down(); }
+            if (player.GetButton("PadEast")) { currentSystem.PadEast(); }
+            if (player.GetButtonUp("PadEast")) { currentSystem.PadEast_Up(); }
+            if (player.GetButtonDown("PadEast")) { currentSystem.PadEast_Down(); }
+            if (player.GetButton("PadWest")) { currentSystem.PadWest(); }
+            if (player.GetButtonUp("PadWest")) { currentSystem.PadWest_Up(); }
+            if (player.GetButtonDown("PadWest")) { currentSystem.PadWest_Down(); }
+
+            if (player.GetButton("ButtonStart")) { currentSystem.ButtonStart(); }
+            if (player.GetButtonUp("ButtonStart")) { currentSystem.ButtonStart_Up(); }
+            if (player.GetButtonDown("ButtonStart")) { currentSystem.ButtonStart_Down(); }
+            if (player.GetButton("ButtonSelect")) { currentSystem.ButtonSelect(); }
+            if (player.GetButtonUp("ButtonSelect")) { currentSystem.ButtonSelect_Up(); }
+            if (player.GetButtonDown("ButtonSelect")) { currentSystem.ButtonSelect_Down(); }
         }
     }
     #endregion

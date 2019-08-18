@@ -28,7 +28,7 @@ public static class LocalPlayers
 
 
 
-public enum PlayerType { Default = 0, Throttle = 1, Buoyancy = 2, Steering = 3 }
+public enum PlayerType { Default = 0, SubSystem = 1 }
 
 public class PlayerInfo
 {
