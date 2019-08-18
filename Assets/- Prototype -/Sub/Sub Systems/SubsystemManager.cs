@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class SubsystemManager : MonoBehaviour
 {
-    public SubController SubToManage;
+    [Tooltip("The axis value will be raised to this power. The higher the value the longer the curve stays at a lower value.")]
+    [Range(0.5f, 5f)]
+    public float axisCurveFactor;
+    
+    [ReadOnly] public SubController SubToManage;
     void Start()
     {
         SubToManage = transform.parent.GetComponent<SubController>();

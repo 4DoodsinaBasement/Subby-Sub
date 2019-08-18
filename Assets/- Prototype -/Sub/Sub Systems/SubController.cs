@@ -25,7 +25,7 @@ public class SubController : MonoBehaviour
 
     #region Throttle
     [Header("Throttle")]
-    public float throttle = 0;
+    [ReadOnly] public float throttle = 0;
     public float accThrottle = 3.0f;
     public float maxSpeed_horizontal = 10f;
 
@@ -38,7 +38,7 @@ public class SubController : MonoBehaviour
 
     #region Buoyancy
     [Header("Buoancy")]
-    public float buoyancy = 0;
+    [ReadOnly] public float buoyancy = 0;
     public float accBuoyancy = 3;
     public float maxSpeed_vertical = 3.0f;
 
@@ -51,13 +51,11 @@ public class SubController : MonoBehaviour
 
     #region Steering
     [Header("Steering")]
-    public float steering = 0;
+    [ReadOnly] public float steering = 0;
     public float accSteering = 1;
 
     void AdjustRotation()
     {
-        Debug.Log((accSteering / 1000) * steering);
-
         rb.angularVelocity = new Vector3(0, (accSteering / 1000) * steering, 0);
     }
     #endregion

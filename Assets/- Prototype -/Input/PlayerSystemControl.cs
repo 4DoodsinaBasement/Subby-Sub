@@ -6,8 +6,7 @@ using UnityEngine;
 public class PlayerSystemControl : MonoBehaviour
 {
     PlayerInfo player;
-    public SubsystemTemplate observedSystem;
-    public SubsystemTemplate currentSystem;
+    [ReadOnly] public SubsystemTemplate observedSystem, currentSystem;
 
 
     void Awake()
@@ -28,6 +27,7 @@ public class PlayerSystemControl : MonoBehaviour
         }
     }
 
+
     public void EnterSystem() { player.type = PlayerType.SubSystem; currentSystem = observedSystem; }
     public void ExitSystem() { player.type = PlayerType.Default; currentSystem = null; }
 
@@ -36,7 +36,6 @@ public class PlayerSystemControl : MonoBehaviour
 
         if (other.gameObject.tag == "System")
         {
-            Debug.Log(other.name);
             if (other.gameObject.GetComponent<SubsystemTemplate>() != null) { observedSystem = other.GetComponent<SubsystemTemplate>(); }
         }
     }

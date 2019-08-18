@@ -12,7 +12,7 @@ public class PlayerFPS : MonoBehaviour
 
     public Transform playerCamera;
     public float lookSensitivity = 3.0f, moveSpeed = 5.0f, airMovePercent = 0.35f, gravity = 15.0f;
-    public bool grounded;
+    [ReadOnly] public bool grounded;
     public float jumpForce = 5.0f;
 
     

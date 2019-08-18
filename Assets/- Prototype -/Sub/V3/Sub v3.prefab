@@ -40,7 +40,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ebd9de02d637504090d831b93b85004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SubToManage: {fileID: 1867692227}
+  axisCurveFactor: 3
+  SubToManage: {fileID: 0}
 --- !u!114 &1269116416
 MonoBehaviour:
   m_ObjectHideFlags: 0
