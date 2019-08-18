@@ -11,15 +11,11 @@ public class Throttle : SubsystemTemplate
 
     void UpdateThrottle(float value)
     {
-        if (value > 0)
+        if (value != 0)
         {
-            manager.SubToManage.throttle += (deltaThrottle / 100 * Time.deltaTime);
-            manager.SubToManage.throttle = Mathf.Clamp(manager.SubToManage.throttle, -0.5f, 1.0f);
-        }
-        else if (value < 0)
-        {
-            manager.SubToManage.throttle -= (deltaThrottle / 100 * Time.deltaTime);
-            manager.SubToManage.throttle = Mathf.Clamp(manager.SubToManage.throttle, -0.5f, 1.0f);
+            value = Mathf.Pow(value, manager.axisCurveFactor);
+            manager.SubToManage.throttle += (((deltaThrottle * value) / 100) * Time.deltaTime);
+            manager.SubToManage.throttle = Mathf.Clamp(manager.SubToManage.throttle, -0.5f, 1f);
         }
     }
 

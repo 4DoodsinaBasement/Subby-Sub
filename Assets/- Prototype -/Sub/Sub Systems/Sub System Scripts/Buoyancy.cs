@@ -11,15 +11,11 @@ public class Buoyancy : SubsystemTemplate
 
     void UpdateDepth(float value)
     {
-        if (value > 0)
+        if (value != 0)
         {
-            manager.SubToManage.buoyancy += (deltaBuoyancy / 100 * Time.deltaTime);
-            manager.SubToManage.buoyancy = Mathf.Clamp(manager.SubToManage.buoyancy, -1.0f, 1.0f);
-        }
-        else if (value < 0)
-        {
-            manager.SubToManage.buoyancy -= (deltaBuoyancy / 100 * Time.deltaTime);
-            manager.SubToManage.buoyancy = Mathf.Clamp(manager.SubToManage.buoyancy, -1.0f, 1.0f);
+            value = Mathf.Pow(value, manager.axisCurveFactor);
+            manager.SubToManage.buoyancy += (((deltaBuoyancy * value) / 100) * Time.deltaTime);
+            manager.SubToManage.buoyancy = Mathf.Clamp(manager.SubToManage.buoyancy, -1f, 1f);
         }
     }
 

@@ -11,15 +11,11 @@ public class Steering : SubsystemTemplate
 
     void UpdateSteering(float value)
     {
-        if (value > 0)
+        if (value != 0)
         {
-            manager.SubToManage.steering += (deltaSteering * Time.deltaTime);
-            manager.SubToManage.steering = Mathf.Clamp(manager.SubToManage.steering, -45.0f, 45.0f);
-        }
-        else if (value < 0)
-        {
-            manager.SubToManage.steering -= (deltaSteering * Time.deltaTime);
-            manager.SubToManage.steering = Mathf.Clamp(manager.SubToManage.steering, -45.0f, 45.0f);
+            value = Mathf.Pow(value, manager.axisCurveFactor);
+            manager.SubToManage.steering += ((deltaSteering * value) * Time.deltaTime);
+            manager.SubToManage.steering = Mathf.Clamp(manager.SubToManage.steering, -45f, 45f);
         }
     }
 

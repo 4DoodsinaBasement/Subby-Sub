@@ -837,7 +837,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5113288117987221091}
   - component: {fileID: 5113288117987221089}
-  - component: {fileID: 5113288117987221088}
+  - component: {fileID: 7974730292018459894}
   m_Layer: 0
   m_Name: Steering
   m_TagString: System
@@ -873,7 +873,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5113288117987221088
+--- !u!114 &7974730292018459894
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -882,11 +882,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5113288117987221090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20f43189c266bf242bfa86198f442f9b, type: 3}
+  m_Script: {fileID: 11500000, guid: 903528eb2bb14a34081d4dfc9f7cb2da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  stationType: 3
+  manager: {fileID: 0}
+  deltaSteering: 25
 --- !u!1 &5113288118042078901
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,7 +897,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5113288118042078906}
   - component: {fileID: 5113288118042078904}
-  - component: {fileID: 5113288118042078907}
+  - component: {fileID: 2438425809837242998}
   m_Layer: 0
   m_Name: Buoyancy
   m_TagString: System
@@ -933,7 +933,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5113288118042078907
+--- !u!114 &2438425809837242998
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -942,11 +942,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5113288118042078901}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20f43189c266bf242bfa86198f442f9b, type: 3}
+  m_Script: {fileID: 11500000, guid: 39ae502cea89abd47a58f2540fc573bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  stationType: 2
+  manager: {fileID: 0}
+  deltaBuoyancy: 30
 --- !u!1 &5113288118053620598
 GameObject:
   m_ObjectHideFlags: 0
@@ -1793,6 +1793,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5113288118641916384}
+  - component: {fileID: 4567915844752434708}
   m_Layer: 0
   m_Name: Stations
   m_TagString: Untagged
@@ -1817,6 +1818,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &4567915844752434708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5113288118641916387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ebd9de02d637504090d831b93b85004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axisCurveFactor: 3
+  SubToManage: {fileID: 0}
 --- !u!1 &5113288118683938580
 GameObject:
   m_ObjectHideFlags: 0
@@ -2024,7 +2039,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5113288118808655986}
   - component: {fileID: 5113288118808655984}
-  - component: {fileID: 5113288118808655987}
+  - component: {fileID: 6509326777541691331}
   m_Layer: 0
   m_Name: Throttle
   m_TagString: System
@@ -2060,7 +2075,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5113288118808655987
+--- !u!114 &6509326777541691331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2069,11 +2084,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5113288118808655885}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20f43189c266bf242bfa86198f442f9b, type: 3}
+  m_Script: {fileID: 11500000, guid: bf179a3a7e4e39049a271b3ad46ce10a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupied: 0
-  stationType: 1
+  manager: {fileID: 0}
+  deltaThrottle: 30
 --- !u!1 &5113288118906050507
 GameObject:
   m_ObjectHideFlags: 0
