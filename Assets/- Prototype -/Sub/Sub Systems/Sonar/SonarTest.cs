@@ -113,8 +113,7 @@ public class SonarTest : MonoBehaviour
             remappedBlips = RemapList(blips, indexOfFirstInactive);
 
             List<List<GameObject>> allLineSegments = new List<List<GameObject>>();
-            // set i = 1 to make sure everything is working properly
-            for (int i = 0; i < remappedBlips.Count; i++)
+            for (int i = 1; i < remappedBlips.Count; i++) // "i = 1" is on purpose because the list is remapped to the first inactive blip and index 0 doesn't need a check
             {
                 int lastIndexChecked = GetNextPosition(i);
                 if (i != lastIndexChecked) // If GetNextPosition() returns the same number as passed, it means this blip or the next blip is inactive
