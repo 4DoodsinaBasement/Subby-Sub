@@ -16,16 +16,12 @@ public class SonarTest : MonoBehaviour
     void Start()
     {
         CreateBlips();
-
         UpdateBlips();
         UpdateLine();
     }
 
     void FixedUpdate()
     {
-        if (Time.time % 1.0f == 0)
-        {
-        }
     }
 
 
@@ -121,14 +117,18 @@ public class SonarTest : MonoBehaviour
             for (int i = 0; i < remappedBlips.Count; i++)
             {
                 int lastIndexChecked = GetNextPosition(i);
-                if (i != lastIndexChecked) // If GetNextPosition() returns the same number as passed, it means the next blip is inactive
+                if (i != lastIndexChecked) // If GetNextPosition() returns the same number as passed, it means this blip or the next blip is inactive
                 {
-                    // Debug.Log("There was supposed to be a wall here!");
-
                     List<GameObject> currentLineSegment = new List<GameObject>();
                     for (int currentPointInLineSegment = i; currentPointInLineSegment <= lastIndexChecked; currentPointInLineSegment++)
                     {
                         currentLineSegment.Add(remappedBlips[currentPointInLineSegment]);
+
+                        // Not sure if this is the best place for this, we may need a different way to store this
+                        Vector3 newBackBlipPosition = Vector3.Normalize(remappedBlips[currentPointInLineSegment].transform.position - drawOrigin.transform.position) * 0.5f;
+                        GameObject newBackBlip = Instantiate(mapBlip, newBackBlipPosition, Quaternion.identity);
+                        newBackBlip.transform.parent = remappedBlips[currentPointInLineSegment].transform;
+                        newBackBlip.name = remappedBlips[currentPointInLineSegment].name + " back-blip";
                     }
                     allLineSegments.Add(currentLineSegment);
                 }
@@ -148,6 +148,19 @@ public class SonarTest : MonoBehaviour
         /*
         After each recursion, make a line vertex at range for that level of recursion
          */
+    }
+
+    int GetNextPosition(int currentIndex)
+    {
+        int indexOfLastActive = currentIndex;
+        if (currentIndex < remappedBlips.Count - 1)
+        {
+            if ( remappedBlips[currentIndex].activeSelf && remappedBlips[currentIndex + 1].activeSelf )
+            {
+                indexOfLastActive = GetNextPosition(currentIndex + 1);
+            }
+        }
+        return indexOfLastActive;
     }
 
     List<GameObject> RemapList(List<GameObject> copiedList, int startingIndex)
@@ -170,19 +183,6 @@ public class SonarTest : MonoBehaviour
         }
 
         return listToReturn;
-    }
-
-    int GetNextPosition(int currentIndex)
-    {
-        int indexOfLastActive = currentIndex;
-        if (currentIndex < remappedBlips.Count - 1)
-        {
-            if ( remappedBlips[currentIndex].activeSelf && remappedBlips[currentIndex + 1].activeSelf )
-            {
-                indexOfLastActive = GetNextPosition(currentIndex + 1);
-            }
-        }
-        return indexOfLastActive;
     }
 
     // Yes, you read that peramater correctly ;)
