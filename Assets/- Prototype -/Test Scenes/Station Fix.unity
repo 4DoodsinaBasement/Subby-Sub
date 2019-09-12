@@ -318,6 +318,26 @@ PrefabInstance:
       propertyPath: parentTransform
       value: 
       objectReference: {fileID: 1867692226}
+    - target: {fileID: 2641705221567002966, guid: eedf5585e5d03144da805910b8b8f13b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2785889534815746897, guid: eedf5585e5d03144da805910b8b8f13b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350869589954301956, guid: eedf5585e5d03144da805910b8b8f13b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 21407913219021901, guid: eedf5585e5d03144da805910b8b8f13b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eedf5585e5d03144da805910b8b8f13b, type: 3}
 --- !u!1001 &1061940408
