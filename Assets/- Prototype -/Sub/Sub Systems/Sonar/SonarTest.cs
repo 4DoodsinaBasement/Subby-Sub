@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SonarTest : MonoBehaviour
 {
+    Mesh mesh;
+    
     public GameObject worldBlip, mapBlip;
     public Transform castOrigin, drawOrigin;
     public int resolution = 100;
@@ -15,6 +17,8 @@ public class SonarTest : MonoBehaviour
     
     void Start()
     {
+        mesh = GetComponent<MeshFilter>().mesh;
+        
         CreateBlips();
         UpdateBlips();
         UpdateLine();
@@ -90,14 +94,6 @@ public class SonarTest : MonoBehaviour
     List<GameObject> remappedBlips;
     void UpdateLine()
     {
-        /*
-        Iterate through every blib and check if it's active
-        if active, check if i+1 is active
-        if both true, recur through next blip.
-        store each active blip location
-        when hit non-active, break recursion and make a line with array of positions
-        */
-
         int indexOfFirstInactive = -1;
         foreach (GameObject blip in blips)
         {
@@ -122,12 +118,14 @@ public class SonarTest : MonoBehaviour
                     for (int currentPointInLineSegment = i; currentPointInLineSegment <= lastIndexChecked; currentPointInLineSegment++)
                     {
                         currentLineSegment.Add(remappedBlips[currentPointInLineSegment]);
-
-                        // Not sure if this is the best place for this, we may need a different way to store this
+                    }
+                    for (int currentPointInLineSegment = lastIndexChecked; currentPointInLineSegment >= i; currentPointInLineSegment--)
+                    {
                         Vector3 newBackBlipPosition = Vector3.Normalize(remappedBlips[currentPointInLineSegment].transform.position - drawOrigin.transform.position) * 0.5f;
                         GameObject newBackBlip = Instantiate(mapBlip, newBackBlipPosition, Quaternion.identity);
                         newBackBlip.transform.parent = remappedBlips[currentPointInLineSegment].transform;
                         newBackBlip.name = remappedBlips[currentPointInLineSegment].name + " back-blip";
+                        currentLineSegment.Add(newBackBlip);
                     }
                     allLineSegments.Add(currentLineSegment);
                 }
@@ -141,12 +139,6 @@ public class SonarTest : MonoBehaviour
             // all are active
             // TO-DO: assign remappedBlips to something
         }
-
-
-        // TO-DO 
-        /*
-        After each recursion, make a line vertex at range for that level of recursion
-         */
     }
 
     int GetNextPosition(int currentIndex)
@@ -184,16 +176,40 @@ public class SonarTest : MonoBehaviour
         return listToReturn;
     }
 
-    // Yes, you read that peramater correctly ;)
-    void CreateLineRenderer(List<List<GameObject>> allLineSegments)
+    void CreateLineRenderer(List<List<GameObject>> allLineSegments) // Yes, you read that peramater correctly ;)
     {
+        List<Vector3> vertexList = new List<Vector3>();
+        List<int> triangleList = new List<int>();
+        
         foreach (List<GameObject> lineSegment in allLineSegments)
         {
-            Debug.Log(" --- Starting Line Segment ---");
+            Vector3 averagePosition = Vector3.zero;
             foreach (GameObject point in lineSegment)
             {
-                Debug.Log(point.name);
+                vertexList.Add(point.transform.position);
+                averagePosition += point.transform.position;
             }
+
+            averagePosition /= lineSegment.Count;
+            GameObject averageBlip = Instantiate(mapBlip, averagePosition, Quaternion.identity);
+            averageBlip.transform.parent = drawOrigin.transform;
+            averageBlip.name = "Average Blip " + allLineSegments.IndexOf(lineSegment);
+            vertexList.Add(averageBlip.transform.position);
+
+            // TO-DO: Create Triangles (option #1)
         }
+
+        // TO-DO: Create Triangles (option #2)
+
+        foreach (Vector3 vertex in vertexList)
+        {
+            Debug.Log(vertex + " at index " + vertexList.IndexOf(vertex));
+        }
+
+		// mesh.Clear();
+        // TO-DO: Set Vertices
+        // To-Do: Set Triangles
+		// mesh.Optimize();
+		// mesh.RecalculateNormals();
     }
 }
