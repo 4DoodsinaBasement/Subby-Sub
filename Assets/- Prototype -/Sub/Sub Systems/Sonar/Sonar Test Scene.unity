@@ -859,7 +859,7 @@ MonoBehaviour:
   mapBlip: {fileID: 1219527352110709773, guid: 99452b8b282630f47947ac76a242d801, type: 3}
   castOrigin: {fileID: 379150462}
   drawOrigin: {fileID: 993604619}
-  resolution: 30
+  resolution: 200
   range: 50
 --- !u!4 &993604619
 Transform:
@@ -894,7 +894,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6833a623d1b4df54abdfe933a1483a27, type: 2}
+  - {fileID: 2100000, guid: 9d61b598c1176e64db0210ca213f3788, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
