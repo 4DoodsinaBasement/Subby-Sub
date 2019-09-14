@@ -117,7 +117,9 @@ public class SonarTest : MonoBehaviour
                     List<Vector3> currentLineSegment = new List<Vector3>();
                     for (int currentPointInLineSegment = i; currentPointInLineSegment <= lastIndexChecked; currentPointInLineSegment++)
                     {
-                        currentLineSegment.Add(remappedBlips[currentPointInLineSegment].transform.localPosition);
+                        // Right now this system depends on GameObjects using .localPosition
+                        // If we want to convert this over to Blips and Vector3s, then we'll need to fix the "only works at 0,0,0" bug by calcualting localPosition maually
+                        currentLineSegment.Add(remappedBlips[currentPointInLineSegment].transform.localPosition); 
                     }
                     for (int currentPointInLineSegment = lastIndexChecked; currentPointInLineSegment >= i; currentPointInLineSegment--)
                     {
