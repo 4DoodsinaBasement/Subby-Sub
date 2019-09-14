@@ -20,12 +20,12 @@ public class SonarTest : MonoBehaviour
         mesh = GetComponent<MeshFilter>().mesh;
         
         CreateBlips();
-        UpdateBlips();
-        UpdateLine();
     }
 
     void FixedUpdate()
     {
+        UpdateBlips();
+        UpdateLine();
     }
 
 
@@ -117,7 +117,7 @@ public class SonarTest : MonoBehaviour
                     List<Vector3> currentLineSegment = new List<Vector3>();
                     for (int currentPointInLineSegment = i; currentPointInLineSegment <= lastIndexChecked; currentPointInLineSegment++)
                     {
-                        currentLineSegment.Add(remappedBlips[currentPointInLineSegment].transform.position);
+                        currentLineSegment.Add(remappedBlips[currentPointInLineSegment].transform.localPosition);
                     }
                     for (int currentPointInLineSegment = lastIndexChecked; currentPointInLineSegment >= i; currentPointInLineSegment--)
                     {
@@ -138,7 +138,7 @@ public class SonarTest : MonoBehaviour
         }
     }
 
-    int GetNextPosition(int currentIndex)
+    int GetNextPosition(int currentIndex) // Recursive function to iterate through all of the blips
     {
         int indexOfLastActive = currentIndex;
         if (currentIndex < remappedBlips.Count - 1)
