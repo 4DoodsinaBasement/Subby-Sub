@@ -108,31 +108,28 @@ public class SonarTest : MonoBehaviour
         {
             remappedBlips = RemapList(blips, indexOfFirstInactive);
 
-            List<List<GameObject>> allLineSegments = new List<List<GameObject>>();
+            List<List<Vector3>> allLineSegments = new List<List<Vector3>>();
             for (int i = 1; i < remappedBlips.Count; i++) // "i = 1" is on purpose because the list is remapped to the first inactive blip and index 0 doesn't need a check
             {
                 int lastIndexChecked = GetNextPosition(i);
                 if (i != lastIndexChecked) // If GetNextPosition() returns the same number as passed, it means this blip or the next blip is inactive
                 {
-                    List<GameObject> currentLineSegment = new List<GameObject>();
+                    List<Vector3> currentLineSegment = new List<Vector3>();
                     for (int currentPointInLineSegment = i; currentPointInLineSegment <= lastIndexChecked; currentPointInLineSegment++)
                     {
-                        currentLineSegment.Add(remappedBlips[currentPointInLineSegment]);
+                        currentLineSegment.Add(remappedBlips[currentPointInLineSegment].transform.position);
                     }
                     for (int currentPointInLineSegment = lastIndexChecked; currentPointInLineSegment >= i; currentPointInLineSegment--)
                     {
                         Vector3 newBackBlipPosition = Vector3.Normalize(remappedBlips[currentPointInLineSegment].transform.position - drawOrigin.transform.position) * 0.5f;
-                        GameObject newBackBlip = Instantiate(mapBlip, newBackBlipPosition, Quaternion.identity);
-                        newBackBlip.transform.parent = remappedBlips[currentPointInLineSegment].transform;
-                        newBackBlip.name = remappedBlips[currentPointInLineSegment].name + " back-blip";
-                        currentLineSegment.Add(newBackBlip);
+                        currentLineSegment.Add(newBackBlipPosition);
                     }
                     allLineSegments.Add(currentLineSegment);
                 }
                 i = lastIndexChecked;
             }
             
-            CreateLineRenderer(allLineSegments);
+            GenerateMesh(allLineSegments);
         }
         else
         {
@@ -170,60 +167,41 @@ public class SonarTest : MonoBehaviour
         return listToReturn;
     }
 
-    void CreateLineRenderer(List<List<GameObject>> allLineSegments) // Yes, you read that peramater correctly ;)
+    void GenerateMesh(List<List<Vector3>> allLineSegments) // Yes, you read that peramater correctly ;)
     {
         List<Vector3> vertexList = new List<Vector3>();
         List<int> triangleList = new List<int>();
         
-        int triangleIndexCounter;
-        foreach (List<GameObject> lineSegment in allLineSegments)
+        foreach (List<Vector3> lineSegment in allLineSegments)
         {
-            Vector3 averagePosition = Vector3.zero;
-            foreach (GameObject point in lineSegment)
+            Vector3 averageSegmentPosition = Vector3.zero;
+            foreach (Vector3 point in lineSegment)
             {
-                vertexList.Add(point.transform.position);
-                averagePosition += point.transform.position;
+                vertexList.Add(point);
+                averageSegmentPosition += point;
             }
 
-            averagePosition /= lineSegment.Count;
-            GameObject averageBlip = Instantiate(mapBlip, averagePosition, Quaternion.identity);
-            averageBlip.transform.parent = drawOrigin.transform;
-            averageBlip.name = "Average Blip " + allLineSegments.IndexOf(lineSegment);
-            vertexList.Add(averageBlip.transform.position);
-            int averageBlipIndex = vertexList.IndexOf(averageBlip.transform.position);
-
-            // TO-DO: Create Triangles (option #1)
+            averageSegmentPosition /= lineSegment.Count;
+            vertexList.Add(averageSegmentPosition);
+            int averageBlipIndex = vertexList.IndexOf(averageSegmentPosition);
 
             int firstIndexOfLine = -1;
-            foreach (GameObject point in lineSegment)
+            foreach (Vector3 point in lineSegment)
             {
-                if (lineSegment.IndexOf(point) == 0) { firstIndexOfLine = vertexList.IndexOf(point.transform.position); }
+                if (lineSegment.IndexOf(point) == 0) { firstIndexOfLine = vertexList.IndexOf(point); }
                 
-                if (vertexList.IndexOf(point.transform.position) + 1 == averageBlipIndex)
+                if (vertexList.IndexOf(point) + 1 == averageBlipIndex)
                 {
                     triangleList.Add(firstIndexOfLine);
                 }
                 else
                 {
-                    triangleList.Add(vertexList.IndexOf(point.transform.position) + 1);
+                    triangleList.Add(vertexList.IndexOf(point) + 1);
                 }
-                triangleList.Add(vertexList.IndexOf(point.transform.position));
+                triangleList.Add(vertexList.IndexOf(point));
                 triangleList.Add(averageBlipIndex);
             }
         }
-
-        Debug.Log(" --- Debugging Triangle List --- ");
-        foreach (int index in triangleList)
-        {
-            Debug.Log(index);
-        }
-
-        // TO-DO: Create Triangles (option #2)
-
-        // foreach (Vector3 vertex in vertexList)
-        // {
-        //     Debug.Log(vertex + " at index " + vertexList.IndexOf(vertex));
-        // }
 
 		mesh.Clear();
         mesh.SetVertices(vertexList);
