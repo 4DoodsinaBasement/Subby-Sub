@@ -162,14 +162,8 @@ public class SonarTest : MonoBehaviour
         {
             int wrappedIndex;
             
-            if (startingIndex + i >= copiedList.Count)
-            {
-                wrappedIndex = i - copiedList.Count;
-            }
-            else
-            {
-                wrappedIndex = i;
-            }
+            if (startingIndex + i >= copiedList.Count) { wrappedIndex = i - copiedList.Count; }
+            else { wrappedIndex = i; }
             listToReturn.Add(copiedList[startingIndex + wrappedIndex]);
         }
 
@@ -181,6 +175,7 @@ public class SonarTest : MonoBehaviour
         List<Vector3> vertexList = new List<Vector3>();
         List<int> triangleList = new List<int>();
         
+        int triangleIndexCounter;
         foreach (List<GameObject> lineSegment in allLineSegments)
         {
             Vector3 averagePosition = Vector3.zero;
@@ -195,21 +190,45 @@ public class SonarTest : MonoBehaviour
             averageBlip.transform.parent = drawOrigin.transform;
             averageBlip.name = "Average Blip " + allLineSegments.IndexOf(lineSegment);
             vertexList.Add(averageBlip.transform.position);
+            int averageBlipIndex = vertexList.IndexOf(averageBlip.transform.position);
 
             // TO-DO: Create Triangles (option #1)
+
+            int firstIndexOfLine = -1;
+            foreach (GameObject point in lineSegment)
+            {
+                if (lineSegment.IndexOf(point) == 0) { firstIndexOfLine = vertexList.IndexOf(point.transform.position); }
+                
+                if (vertexList.IndexOf(point.transform.position) + 1 == averageBlipIndex)
+                {
+                    triangleList.Add(firstIndexOfLine);
+                }
+                else
+                {
+                    triangleList.Add(vertexList.IndexOf(point.transform.position) + 1);
+                }
+                triangleList.Add(vertexList.IndexOf(point.transform.position));
+                triangleList.Add(averageBlipIndex);
+            }
+        }
+
+        Debug.Log(" --- Debugging Triangle List --- ");
+        foreach (int index in triangleList)
+        {
+            Debug.Log(index);
         }
 
         // TO-DO: Create Triangles (option #2)
 
-        foreach (Vector3 vertex in vertexList)
-        {
-            Debug.Log(vertex + " at index " + vertexList.IndexOf(vertex));
-        }
+        // foreach (Vector3 vertex in vertexList)
+        // {
+        //     Debug.Log(vertex + " at index " + vertexList.IndexOf(vertex));
+        // }
 
-		// mesh.Clear();
-        // TO-DO: Set Vertices
-        // To-Do: Set Triangles
-		// mesh.Optimize();
-		// mesh.RecalculateNormals();
+		mesh.Clear();
+        mesh.SetVertices(vertexList);
+        mesh.SetTriangles(triangleList, 0);
+		mesh.Optimize();
+		mesh.RecalculateNormals();
     }
 }
