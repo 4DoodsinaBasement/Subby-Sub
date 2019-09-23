@@ -94,10 +94,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldBlip: {fileID: 7594332738468090419, guid: a88b5f7c96ba8654bb87153575942dbc,
     type: 3}
-  mapBlip: {fileID: 1219527352110709773, guid: 99452b8b282630f47947ac76a242d801, type: 3}
+  mapBlip: {fileID: 1219527352110709773, guid: 42991b9b07a0d194dabdf35ca4f9f1ba, type: 3}
   castOrigin: {fileID: 0}
   drawOrigin: {fileID: 6320849964384695924}
-  resolution: 200
+  resolution: 180
   range: 50
 --- !u!1 &6320849964878259849
 GameObject:

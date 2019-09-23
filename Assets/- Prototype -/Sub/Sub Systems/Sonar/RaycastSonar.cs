@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SonarTest : MonoBehaviour
+public class RaycastSonar : MonoBehaviour
 {
     Mesh mesh;
     
@@ -12,6 +12,7 @@ public class SonarTest : MonoBehaviour
     public float range;
 
     List<GameObject> blips = new List<GameObject>();
+    List<GameObject> backBlips = new List<GameObject>();
     Vector3 lastHitPosition, thisHitPosition;
     
     
@@ -25,7 +26,7 @@ public class SonarTest : MonoBehaviour
     void FixedUpdate()
     {
         UpdateBlips();
-        UpdateLine();
+        CalculateMesh();
     }
 
 
@@ -45,20 +46,34 @@ public class SonarTest : MonoBehaviour
             if (Physics.Raycast(castOrigin.position, direction, out hit, range, LayerMask.GetMask("Terrain")))
             {
                 relativePosition = hit.point - castOrigin.position;
-                relativePosition *= 0.01f;
+                relativePosition *= (0.01f * transform.localScale.y);
                 
                 GameObject newBlip = Instantiate(mapBlip, drawOrigin.position + relativePosition, Quaternion.identity);
                 blips.Add(newBlip);
                 newBlip.transform.parent = drawOrigin.transform;
                 newBlip.name = string.Format("Blip {0}", i);
+                
+                Vector3 newBackBlipPosition = Vector3.Normalize((drawOrigin.position + relativePosition) - drawOrigin.position) * (0.5f * transform.localScale.y);
+                GameObject newBackBlip = Instantiate(mapBlip, newBackBlipPosition, Quaternion.identity);
+                backBlips.Add(newBackBlip);
+                newBackBlip.transform.parent = drawOrigin.transform;
+                newBackBlip.name = string.Format("Back {0}", i);
             }
             else
             {
-                GameObject newBlip = Instantiate(mapBlip, drawOrigin.position, Quaternion.identity);
-                newBlip.SetActive(false);
+                Vector3 newBlipPosition = Vector3.Normalize(drawOrigin.position + direction) * (0.05f * transform.localScale.y);
+                GameObject newBlip = Instantiate(mapBlip, newBlipPosition, Quaternion.identity);
                 blips.Add(newBlip);
+                newBlip.SetActive(false);
                 newBlip.transform.parent = drawOrigin.transform;
                 newBlip.name = string.Format("Blip {0}", i);
+
+                Vector3 newBackBlipPosition = Vector3.Normalize((drawOrigin.position + newBlipPosition) - drawOrigin.position) * (0.5f * transform.localScale.y);
+                GameObject newBackBlip = Instantiate(mapBlip, newBackBlipPosition, Quaternion.identity);
+                backBlips.Add(newBackBlip);
+                newBackBlip.SetActive(false);
+                newBackBlip.transform.parent = drawOrigin.transform;
+                newBackBlip.name = string.Format("Back {0}", i);
             }
         }
     }
@@ -79,20 +94,24 @@ public class SonarTest : MonoBehaviour
             if (Physics.Raycast(castOrigin.position, direction, out hit, range, LayerMask.GetMask("Terrain")))
             {
                 relativePosition = hit.point - castOrigin.position;
-                relativePosition *= 0.01f;
+                relativePosition *= (0.01f * transform.localScale.y);
                 
                 blip.SetActive(true);
                 blip.transform.position = drawOrigin.position + relativePosition;
+                backBlips[blips.IndexOf(blip)].SetActive(true);
+                Vector3 newBackBlipPosition = Vector3.Normalize((blip.transform.position) - drawOrigin.position) * (0.5f * transform.localScale.y);
+                backBlips[blips.IndexOf(blip)].transform.position = drawOrigin.position + newBackBlipPosition;
             }
             else
             {
                 blip.SetActive(false);
+                backBlips[blips.IndexOf(blip)].SetActive(false);
             }
         }
     }
 
-    List<GameObject> remappedBlips;
-    void UpdateLine()
+    List<GameObject> remappedBlips, remappedBackBlips;
+    void CalculateMesh()
     {
         int indexOfFirstInactive = -1;
         foreach (GameObject blip in blips)
@@ -107,6 +126,7 @@ public class SonarTest : MonoBehaviour
         if (indexOfFirstInactive != -1)
         {
             remappedBlips = RemapList(blips, indexOfFirstInactive);
+            remappedBackBlips = RemapList(backBlips, indexOfFirstInactive);
 
             List<List<Vector3>> allLineSegments = new List<List<Vector3>>();
             for (int i = 1; i < remappedBlips.Count; i++) // "i = 1" is on purpose because the list is remapped to the first inactive blip and index 0 doesn't need a check
@@ -119,12 +139,11 @@ public class SonarTest : MonoBehaviour
                     {
                         // Right now this system depends on GameObjects using .localPosition
                         // If we want to convert this over to Blips and Vector3s, then we'll need to fix the "only works at 0,0,0" bug by calcualting localPosition maually
-                        currentLineSegment.Add(remappedBlips[currentPointInLineSegment].transform.localPosition); 
+                        currentLineSegment.Add(remappedBlips[currentPointInLineSegment].transform.localPosition);
                     }
                     for (int currentPointInLineSegment = lastIndexChecked; currentPointInLineSegment >= i; currentPointInLineSegment--)
                     {
-                        Vector3 newBackBlipPosition = Vector3.Normalize(remappedBlips[currentPointInLineSegment].transform.position - drawOrigin.transform.position) * 0.5f;
-                        currentLineSegment.Add(newBackBlipPosition);
+                        currentLineSegment.Add(remappedBackBlips[currentPointInLineSegment].transform.localPosition);
                     }
                     allLineSegments.Add(currentLineSegment);
                 }
