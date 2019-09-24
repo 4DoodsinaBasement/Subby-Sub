@@ -235,6 +235,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a090283048b6ba4c9cab9effa2424d2, type: 3}
+--- !u!4 &600066371 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5949756873116896585, guid: 6a090283048b6ba4c9cab9effa2424d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 191017842}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1457980118
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,22 +403,22 @@ PrefabInstance:
         type: 3}
       propertyPath: parentTransform
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 600066371}
     - target: {fileID: 8428240866020187337, guid: eedf5585e5d03144da805910b8b8f13b,
         type: 3}
       propertyPath: parentTransform
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 600066371}
     - target: {fileID: 5769699278009579986, guid: eedf5585e5d03144da805910b8b8f13b,
         type: 3}
       propertyPath: parentTransform
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 600066371}
     - target: {fileID: 4819230051243488667, guid: eedf5585e5d03144da805910b8b8f13b,
         type: 3}
       propertyPath: parentTransform
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 600066371}
     - target: {fileID: 7150969249130741484, guid: eedf5585e5d03144da805910b8b8f13b,
         type: 3}
       propertyPath: m_LocalPosition.z
