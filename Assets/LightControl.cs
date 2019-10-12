@@ -18,6 +18,19 @@ public class LightControl : SubsystemTemplate
          public float XminAngle = -30f;
          public float XmaxAngle = 30f;
      
+void switchLight()
+{
+        Light lit = GetComponentInChildren<Light>(true);
+        if(lit.enabled)
+        {
+            lit.enabled = false;
+        }
+        else
+        {
+            lit.enabled = true;
+        }
+}
+
  float ClampAngle(float angle, float from, float to) {
    if(angle > 180) angle = angle -360;// - angle;
    angle = Mathf.Clamp(angle, from, to);
@@ -60,7 +73,7 @@ public class LightControl : SubsystemTemplate
     public override void ButtonSouth_Down() {}
     public override void ButtonEast() {}
     public override void ButtonEast_Up() {}
-    public override void ButtonEast_Down() {}
+    public override void ButtonEast_Down() {switchLight();}
     public override void ButtonWest() {}
     public override void ButtonWest_Up() {}
     public override void ButtonWest_Down() {}
