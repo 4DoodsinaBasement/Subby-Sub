@@ -5,6 +5,8 @@ using UnityEngine;
 public class Darkness : MonoBehaviour
 {
     public GameObject sub;
+    public float FullLigthDepth;
+    public float TotalDarknessDepth;
     Light lt;
    void Start()
     {
@@ -17,17 +19,17 @@ public class Darkness : MonoBehaviour
     {
         float depth = sub.transform.position.y;
 
-        if (depth >0)
+        if (depth > FullLigthDepth)
         {
             lt.intensity = 1;
         }
         else
-        if (depth < -100)
+        if (depth < TotalDarknessDepth)
         {
             lt.intensity = 0;
         }
         else{
-            lt.intensity = (depth * -1)/100;
+            lt.intensity = (depth- TotalDarknessDepth)/(FullLigthDepth - TotalDarknessDepth);
         }
 
     

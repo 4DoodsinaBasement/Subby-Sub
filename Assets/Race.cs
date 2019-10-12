@@ -1,18 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Race : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public TextMeshPro display;
+    public GameObject [] rings;
+    
+    int numberOfRings;
+    
+    void start ()
     {
-        
+        numberOfRings = 0; 
+    }
+    
+    void update()
+    {
+        //if( )
     }
 
-    // Update is called once per frame
-    void Update()
+    void onTriggerEnter()
     {
-        
+        numberOfRings++;
     }
+
 }
