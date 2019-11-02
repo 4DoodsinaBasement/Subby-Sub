@@ -1918,6 +1918,7 @@ GameObject:
   - component: {fileID: 5949756873116896585}
   - component: {fileID: 5949756873116896599}
   - component: {fileID: 1909494129378598005}
+  - component: {fileID: 2701188139112713554}
   m_Layer: 0
   m_Name: Sub v4
   m_TagString: Untagged
@@ -1972,7 +1973,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4583f775927580a4eba606d8af7bc580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  maxHealth: 100
+  currentHealth: 100
   throttle: 0
   accThrottle: 3
   maxSpeed_horizontal: 10
@@ -1988,6 +1990,14 @@ MonoBehaviour:
   ThrottlePower: {fileID: 1874228186405400543}
   BuoyancyDepth: {fileID: 1874228184754700973}
   BuoyancyPower: {fileID: 1874228185709251597}
+--- !u!81 &2701188139112713554
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5949756873116896586}
+  m_Enabled: 1
 --- !u!1 &6794818117928528372
 GameObject:
   m_ObjectHideFlags: 0
