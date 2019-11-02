@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 79553509}
   - component: {fileID: 79553508}
   - component: {fileID: 79553507}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,15 +284,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5949756872914498304, guid: 6a090283048b6ba4c9cab9effa2424d2,
+        type: 3}
+      propertyPath: m_Name
+      value: Internal Lights
+      objectReference: {fileID: 0}
     - target: {fileID: 5949756871820599332, guid: 6a090283048b6ba4c9cab9effa2424d2,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5949756871820599330, guid: 6a090283048b6ba4c9cab9effa2424d2,
+        type: 3}
+      propertyPath: m_Range
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5949756871820599330, guid: 6a090283048b6ba4c9cab9effa2424d2,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4516843010717528554, guid: 6a090283048b6ba4c9cab9effa2424d2,
         type: 3}
       propertyPath: m_ClearFlags
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884303391663990800, guid: 6a090283048b6ba4c9cab9effa2424d2,
+        type: 3}
+      propertyPath: m_Name
+      value: LazorCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 8020751502313068785, guid: 6a090283048b6ba4c9cab9effa2424d2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a090283048b6ba4c9cab9effa2424d2, type: 3}
@@ -308,7 +333,7 @@ GameObject:
   - component: {fileID: 1416427860}
   - component: {fileID: 1416427859}
   - component: {fileID: 1416427858}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -399,7 +424,7 @@ GameObject:
   - component: {fileID: 1416908855}
   - component: {fileID: 1416908854}
   - component: {fileID: 1416908853}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -490,7 +515,7 @@ GameObject:
   - component: {fileID: 1599800311}
   - component: {fileID: 1599800310}
   - component: {fileID: 1599800309}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -586,7 +611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &1777423142
 Light:
   m_ObjectHideFlags: 0
@@ -688,7 +713,7 @@ GameObject:
   - component: {fileID: 1838776567}
   - component: {fileID: 1838776566}
   - component: {fileID: 1838776565}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -779,7 +804,7 @@ GameObject:
   - component: {fileID: 1886264235}
   - component: {fileID: 1886264234}
   - component: {fileID: 1886264233}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -870,7 +895,7 @@ GameObject:
   - component: {fileID: 1974194921}
   - component: {fileID: 1974194920}
   - component: {fileID: 1974194919}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

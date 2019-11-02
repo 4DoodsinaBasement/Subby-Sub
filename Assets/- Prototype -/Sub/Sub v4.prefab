@@ -1918,6 +1918,7 @@ GameObject:
   - component: {fileID: 5949756873116896585}
   - component: {fileID: 5949756873116896599}
   - component: {fileID: 1909494129378598005}
+  - component: {fileID: 2701188139112713554}
   m_Layer: 0
   m_Name: Sub v4
   m_TagString: Untagged
@@ -1972,6 +1973,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4583f775927580a4eba606d8af7bc580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 100
   throttle: 0
   accThrottle: 3
   maxSpeed_horizontal: 10
@@ -1980,12 +1983,21 @@ MonoBehaviour:
   maxSpeed_vertical: 3
   steering: 0
   accSteering: 2
+  SubHealth: {fileID: 3096769730770881665}
   SteeringHeading: {fileID: 1874228185515476171}
   SteeringTurning: {fileID: 1874228185598128124}
   ThrottleSpeed: {fileID: 1874228185363663564}
   ThrottlePower: {fileID: 1874228186405400543}
   BuoyancyDepth: {fileID: 1874228184754700973}
   BuoyancyPower: {fileID: 1874228185709251597}
+--- !u!81 &2701188139112713554
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5949756873116896586}
+  m_Enabled: 1
 --- !u!1 &6794818117928528372
 GameObject:
   m_ObjectHideFlags: 0
@@ -3337,6 +3349,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5949756873116896585}
     m_Modifications:
+    - target: {fileID: 5113288118641916387, guid: cf8e6299d34cc834cb92901236e38e08,
+        type: 3}
+      propertyPath: m_Name
+      value: SubSystems
+      objectReference: {fileID: 0}
     - target: {fileID: 5113288118641916384, guid: cf8e6299d34cc834cb92901236e38e08,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3391,11 +3408,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5113288118641916387, guid: cf8e6299d34cc834cb92901236e38e08,
-        type: 3}
-      propertyPath: m_Name
-      value: SubSystems
       objectReference: {fileID: 0}
     - target: {fileID: 5113288117987221091, guid: cf8e6299d34cc834cb92901236e38e08,
         type: 3}
@@ -3577,6 +3589,18 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3096769730770881665 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8506590790104833833, guid: cf8e6299d34cc834cb92901236e38e08,
+    type: 3}
+  m_PrefabInstance: {fileID: 6698142275799159720}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6742544415400296465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3584,6 +3608,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5949756873116896585}
     m_Modifications:
+    - target: {fileID: 7175586076604812467, guid: eedf5585e5d03144da805910b8b8f13b,
+        type: 3}
+      propertyPath: m_Name
+      value: Characters
+      objectReference: {fileID: 0}
     - target: {fileID: 7175586076604812466, guid: eedf5585e5d03144da805910b8b8f13b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3638,11 +3667,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7175586076604812467, guid: eedf5585e5d03144da805910b8b8f13b,
-        type: 3}
-      propertyPath: m_Name
-      value: Characters
       objectReference: {fileID: 0}
     - target: {fileID: 7150969249130741484, guid: eedf5585e5d03144da805910b8b8f13b,
         type: 3}

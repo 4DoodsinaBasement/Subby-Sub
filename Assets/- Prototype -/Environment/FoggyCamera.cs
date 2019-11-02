@@ -22,8 +22,13 @@ public class FoggyCamera: MonoBehaviour
         if ((transform.position.y < waterHeight) != isUnderwater)
         {
             isUnderwater = transform.position.y < waterHeight;
-            if (isUnderwater) SetUnderwater ();
-            if (!isUnderwater) SetNormal ();
+            if (isUnderwater) 
+            {
+                SetUnderwater();
+            }else
+            {
+                SetNormal();
+            }
         }
     }
 
