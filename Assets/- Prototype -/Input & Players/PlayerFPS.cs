@@ -88,7 +88,7 @@ public class PlayerFPS : MonoBehaviour
             Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
             
             Vector3 addVelocityFromSub = Vector3.zero;
-            if (GetComponent<RigidbodyChild>().parentRigidbody != null) { addVelocityFromSub = GetComponent<RigidbodyChild>().parentRigidbody.velocity; }
+            if (GetComponent<RigidbodyChild>() != null && GetComponent<RigidbodyChild>().parentRigidbody != null) { addVelocityFromSub = GetComponent<RigidbodyChild>().parentRigidbody.velocity; }
             
             if (grounded)
             {
