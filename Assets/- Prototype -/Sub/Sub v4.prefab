@@ -1984,7 +1984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnDeath: 0
-  maxHP: 0
+  maxHP: 100
   _currentHP: 0
 --- !u!114 &1909494129378598005
 MonoBehaviour:
