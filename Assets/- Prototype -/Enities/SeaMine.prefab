@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3841450760582060371}
   - component: {fileID: 3371215570148239084}
   - component: {fileID: 8652000406648334019}
+  - component: {fileID: 4511208425136204824}
   m_Layer: 0
   m_Name: SeaMine
   m_TagString: Untagged
@@ -5720,3 +5721,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7ad33dcc58f34081b033c05683eb558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseDamage: 7
+--- !u!114 &4511208425136204824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3841450760582060368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 541c78a8d657f5642a2c662fbe04b0ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 1
+  startAtMaxHP: 1

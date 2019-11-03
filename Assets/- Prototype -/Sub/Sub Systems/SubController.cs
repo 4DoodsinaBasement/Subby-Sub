@@ -23,22 +23,6 @@ public class SubController : MonoBehaviour
 		Debugging();
 	}
 
-	#region Health
-	[Header("Health")]
-	public int maxHealth = 100;
-	public int currentHealth = 100;
-	public void ModifyHealth(int value)
-	{
-		currentHealth += value;
-		if (currentHealth > maxHealth) { currentHealth = maxHealth; }
-
-		if (currentHealth <= 0)
-		{
-			Debug.Log("YOU DIED!!!!!!!!!!!!!!!");
-		}
-	}
-	#endregion
-
 	#region Throttle
 	[Header("Throttle")]
 	[ReadOnly] public float throttle = 0;
@@ -88,7 +72,7 @@ public class SubController : MonoBehaviour
 
 	void ReadOut()
 	{
-		SubHealth.text = string.Format("{0} / {1} HP", currentHealth, maxHealth);
+		SubHealth.text = string.Format("{0} / {1} HP", GetComponent<HPManager>().currentHP, GetComponent<HPManager>().maxHP);
 		SteeringHeading.text = string.Format("{0:0}°", transform.eulerAngles.y);
 		SteeringTurning.text = string.Format("{0:0}°", steering);
 		ThrottleSpeed.text = string.Format("{0:0.00} m/s", rb.velocity.magnitude);
