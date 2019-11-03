@@ -17,11 +17,11 @@ public class MineScript : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		SubController somePoorChap = other.gameObject.GetComponent<SubController>();
+		HPManager somePoorChap = other.gameObject.GetComponent<HPManager>();
 
 		if (somePoorChap != null)
 		{
-			somePoorChap.ModifyHealth(-baseDamage);
+			somePoorChap.currentHP -= baseDamage;
 			Destroy(gameObject);
 		}
 	}

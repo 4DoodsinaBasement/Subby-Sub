@@ -8,7 +8,7 @@ public class HealthControl : SubsystemTemplate
 
 	void SubHeal()
 	{
-		manager.SubToManage.ModifyHealth(healAmount);
+		manager.SubToManage.GetComponent<HPManager>().currentHP += healAmount;
 	}
 	public override void LeftStickX(float value) { }
 	public override void LeftStickY(float value) { }
