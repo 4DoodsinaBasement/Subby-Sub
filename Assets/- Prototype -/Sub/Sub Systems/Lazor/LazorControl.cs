@@ -6,14 +6,12 @@ public class LazorControl : SubsystemTemplate
 {
 	[Header("Rendering Settings")]
 	public GameObject cam;
-	public GameObject lazorHolder;
+	public GameObject rangeTarget;
 	LineRenderer lazor;
 
 	[Header("Turning Settings")]
-	public float YminAngle = -30f;
-	public float YmaxAngle = 30f;
-	public float XminAngle = -30f;
 	public float XmaxAngle = 30f;
+	public float YmaxAngle = 30f;
 
 	[Header("Lazor Settings")]
 	[ReadOnly] public bool lazorOn = false;
@@ -24,22 +22,28 @@ public class LazorControl : SubsystemTemplate
 	[ReadOnly] public float lazorExpire = 0f;
 	[ReadOnly] public float cooldownExpire = 0f;
 
+	Vector3 startingRotation;
+
 
 	void Start()
 	{
 		lazor = GetComponent<LineRenderer>();
+
+		Vector3 setRange = rangeTarget.transform.localEulerAngles;
+		setRange.z = range;
+		rangeTarget.transform.localEulerAngles = setRange;
 	}
 
 	void Update()
 	{
 		// Update line renderer position
-		lazor.SetPosition(0, lazorHolder.transform.position);
+		lazor.SetPosition(0, cam.transform.position);
 		RaycastHit hit;
-		if (Physics.Raycast(lazorHolder.transform.position, -lazorHolder.transform.right, out hit, range))
+		if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
 		{
 			lazor.SetPosition(1, hit.point);
 		}
-		else lazor.SetPosition(1, -lazorHolder.transform.right * range);
+		else lazor.SetPosition(1, rangeTarget.transform.position);
 
 
 		// Turn on and off the lazor
@@ -96,14 +100,14 @@ public class LazorControl : SubsystemTemplate
 	{
 		Vector3 rot = cam.transform.localEulerAngles;
 		rot.y += value;
-		rot.y = ClampAngle(rot.y, XminAngle, XmaxAngle);
+		rot.y = ClampAngle(rot.y, -XmaxAngle, XmaxAngle);
 		cam.transform.localEulerAngles = rot;
 	}
 	void UpdateRotateY(float value)
 	{
 		Vector3 rot = cam.transform.localEulerAngles;
-		rot.z -= value;
-		rot.z = ClampAngle(rot.z, YminAngle, YmaxAngle);
+		rot.x -= value;
+		rot.x = ClampAngle(rot.x, -YmaxAngle, YmaxAngle);
 		cam.transform.localEulerAngles = rot;
 	}
 
