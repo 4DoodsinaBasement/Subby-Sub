@@ -330,7 +330,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MineCount: {fileID: 0}
-  MissionValueText: {fileID: 6197212007128881912}
+  DescriptionText: {fileID: 7072103735002935065}
+  ValueText: {fileID: 6197212007128881912}
 --- !u!1 &4454389540378151669
 GameObject:
   m_ObjectHideFlags: 0

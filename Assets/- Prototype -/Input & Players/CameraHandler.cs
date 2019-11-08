@@ -24,11 +24,13 @@ public class CameraHandler : MonoBehaviour
         get { return _localPlayers; }
         set { _localPlayers = value; SetCameraInfos(); }
     }
+
+	public int defaultPlayerCount = 1;
     
     public Camera cam1, cam2, cam3, cam4;
 
     
-    void Start() { localPlayers = 3; }
+    void Start() { localPlayers = defaultPlayerCount; }
 
     void Update()
     {
