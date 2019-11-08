@@ -131,7 +131,7 @@ public class LazorControl : SubsystemTemplate
 	public override void ButtonSouth_Down() { }
 	public override void ButtonEast() { }
 	public override void ButtonEast_Up() { }
-	public override void ButtonEast_Down() { SwitchLazorOn(); }
+	public override void ButtonEast_Down() { }
 	public override void ButtonWest() { }
 	public override void ButtonWest_Up() { }
 	public override void ButtonWest_Down() { }
@@ -141,7 +141,7 @@ public class LazorControl : SubsystemTemplate
 	public override void LeftTrigger_Down() { }
 	public override void RightTrigger() { }
 	public override void RightTrigger_Up() { }
-	public override void RightTrigger_Down() { }
+	public override void RightTrigger_Down() { SwitchLazorOn(); }
 	public override void LeftBumper() { }
 	public override void LeftBumper_Up() { }
 	public override void LeftBumper_Down() { }

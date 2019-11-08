@@ -168,7 +168,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 8600000, guid: 8349ba1e36466b1489f9832f873515fb, type: 2}
+  m_Texture: {fileID: 2800000, guid: 89fe341aaaf55914e8b0dc23dda8e8fd, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -636,7 +636,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 050b258c3933f1e45871e3cedefd78fa, type: 2}
+  - {fileID: 2100000, guid: 4f639544fa7f73b4daf2345f7cecaadc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
