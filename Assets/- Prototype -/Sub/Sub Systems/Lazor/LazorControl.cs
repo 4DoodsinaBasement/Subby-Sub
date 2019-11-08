@@ -6,7 +6,7 @@ public class LazorControl : SubsystemTemplate
 {
 	[Header("Rendering Settings")]
 	public GameObject cam;
-	public GameObject lazorHolder;
+	public GameObject rangeTarget;
 	LineRenderer lazor;
 
 	[Header("Turning Settings")]
@@ -31,13 +31,13 @@ public class LazorControl : SubsystemTemplate
 	void Update()
 	{
 		// Update line renderer position
-		lazor.SetPosition(0, lazorHolder.transform.position);
+		lazor.SetPosition(0, cam.transform.position);
 		RaycastHit hit;
-		if (Physics.Raycast(lazorHolder.transform.position, -lazorHolder.transform.right, out hit, range))
+		if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
 		{
 			lazor.SetPosition(1, hit.point);
 		}
-		else lazor.SetPosition(1, -lazorHolder.transform.right * range);
+		else lazor.SetPosition(1, rangeTarget.transform.position);
 
 
 		// Turn on and off the lazor
