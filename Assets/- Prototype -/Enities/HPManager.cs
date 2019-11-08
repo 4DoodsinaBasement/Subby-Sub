@@ -15,6 +15,11 @@ public class HPManager : MonoBehaviour
 		set { _currentHP = value; if (_currentHP > maxHP) { _currentHP = maxHP; } }
 	}
 
+	public void TakeDamage(float damage)
+	{
+		currentHP -= damage;
+	}
+
 
 	void Start()
 	{
