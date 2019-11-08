@@ -329,6 +329,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8aa2ab5e4a117e43b06a1c088cb09ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MineCount: {fileID: 0}
+  MissionValueText: {fileID: 6197212007128881912}
 --- !u!1 &4454389540378151669
 GameObject:
   m_ObjectHideFlags: 0
