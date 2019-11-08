@@ -10,9 +10,7 @@ public class LazorControl : SubsystemTemplate
 	LineRenderer lazor;
 
 	[Header("Turning Settings")]
-	public float YminAngle = -30f;
 	public float YmaxAngle = 30f;
-	public float XminAngle = -30f;
 	public float XmaxAngle = 30f;
 
 	[Header("Lazor Settings")]
@@ -96,14 +94,14 @@ public class LazorControl : SubsystemTemplate
 	{
 		Vector3 rot = cam.transform.localEulerAngles;
 		rot.y += value;
-		rot.y = ClampAngle(rot.y, XminAngle, XmaxAngle);
+		rot.y = ClampAngle(rot.y, -XmaxAngle, XmaxAngle);
 		cam.transform.localEulerAngles = rot;
 	}
 	void UpdateRotateY(float value)
 	{
 		Vector3 rot = cam.transform.localEulerAngles;
-		rot.z -= value;
-		rot.z = ClampAngle(rot.z, YminAngle, YmaxAngle);
+		rot.x -= value;
+		rot.x = ClampAngle(rot.x, -YmaxAngle, YmaxAngle);
 		cam.transform.localEulerAngles = rot;
 	}
 
