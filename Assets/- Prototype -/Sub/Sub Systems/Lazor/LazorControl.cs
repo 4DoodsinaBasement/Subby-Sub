@@ -7,7 +7,9 @@ public class LazorControl : SubsystemTemplate
 	[Header("Rendering Settings")]
 	public GameObject cam;
 	public GameObject rangeTarget;
+	public GameObject hitParticles;
 	LineRenderer lazor;
+	AudioSource audioSource;
 
 	[Header("Turning Settings")]
 	public float XmaxAngle = 30f;
@@ -28,6 +30,7 @@ public class LazorControl : SubsystemTemplate
 	void Start()
 	{
 		lazor = GetComponent<LineRenderer>();
+		audioSource = GetComponent<AudioSource>();
 
 		Vector3 setRange = rangeTarget.transform.localEulerAngles;
 		setRange.z = range;
@@ -42,8 +45,13 @@ public class LazorControl : SubsystemTemplate
 		if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
 		{
 			lazor.SetPosition(1, hit.point);
+			hitParticles.transform.position = hit.point;
 		}
-		else lazor.SetPosition(1, rangeTarget.transform.position);
+		else
+		{
+			lazor.SetPosition(1, rangeTarget.transform.position);
+			// hitParticles.transform.position = transform.position;
+		}
 
 
 		// Turn on and off the lazor
@@ -52,11 +60,17 @@ public class LazorControl : SubsystemTemplate
 			if (Time.time >= lazorExpire)
 			{
 				lazor.enabled = false;
+				audioSource.Stop();
+				hitParticles.SetActive(false);
 			}
 			else
 			{
+				if (audioSource.isPlaying == false) { audioSource.Play(); }
+
 				if (hit.collider != null)
 				{
+					hitParticles.SetActive(true);
+
 					HPManager somePoorChap = hit.collider.GetComponent<HPManager>();
 					if (lazorOn && somePoorChap != null)
 					{

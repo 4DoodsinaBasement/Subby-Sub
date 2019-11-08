@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class MineScript : MonoBehaviour
 {
@@ -17,7 +18,10 @@ public class MineScript : MonoBehaviour
 
 	void Update()
 	{
-
+		if (GetComponent<HPManager>().currentHP <= 0)
+		{
+			Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+		}
 	}
 
 	void OnCollisionEnter(Collision other)
@@ -49,7 +53,10 @@ public class MineScript : MonoBehaviour
 
 	void OnDestroy()
 	{
-		Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+		if (EditorApplication.isPlayingOrWillChangePlaymode)
+		{
+			Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+		}
 	}
 
 	void OnDrawGizmosSelected()
