@@ -8,6 +8,7 @@ public class MineScript : MonoBehaviour
 	public float blastRadius;
 	public float blastForce;
 
+	public GameObject explosionPrefab;
 
 	void Start()
 	{
@@ -21,14 +22,6 @@ public class MineScript : MonoBehaviour
 
 	void OnCollisionEnter(Collision other)
 	{
-		// HPManager somePoorChap = other.collider.gameObject.GetComponent<HPManager>();
-
-		// if (somePoorChap != null)
-		// {
-		// 	somePoorChap.currentHP -= baseDamage;
-		// 	Destroy(gameObject);
-		// }
-
 		Collider[] hitColliders = Physics.OverlapSphere(transform.position, blastRadius);
 
 		List<HPManager> hitEntities = new List<HPManager>();
@@ -52,6 +45,11 @@ public class MineScript : MonoBehaviour
 		{
 			rb.AddExplosionForce(blastForce, transform.position, blastRadius, 0f, ForceMode.VelocityChange);
 		}
+	}
+
+	void OnDestroy()
+	{
+		Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 	}
 
 	void OnDrawGizmosSelected()
