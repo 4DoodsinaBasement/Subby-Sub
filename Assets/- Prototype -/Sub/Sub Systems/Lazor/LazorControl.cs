@@ -10,8 +10,8 @@ public class LazorControl : SubsystemTemplate
 	LineRenderer lazor;
 
 	[Header("Turning Settings")]
-	public float YmaxAngle = 30f;
 	public float XmaxAngle = 30f;
+	public float YmaxAngle = 30f;
 
 	[Header("Lazor Settings")]
 	[ReadOnly] public bool lazorOn = false;
@@ -22,10 +22,16 @@ public class LazorControl : SubsystemTemplate
 	[ReadOnly] public float lazorExpire = 0f;
 	[ReadOnly] public float cooldownExpire = 0f;
 
+	Vector3 startingRotation;
+
 
 	void Start()
 	{
 		lazor = GetComponent<LineRenderer>();
+
+		Vector3 setRange = rangeTarget.transform.localEulerAngles;
+		setRange.z = range;
+		rangeTarget.transform.localEulerAngles = setRange;
 	}
 
 	void Update()
