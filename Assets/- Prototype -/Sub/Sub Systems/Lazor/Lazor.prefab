@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9811321, g: 0, b: 0.0346286, a: 0.2784314}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -5237,6 +5237,7 @@ MonoBehaviour:
   cooldownTime: 2
   lazorExpire: 0
   cooldownExpire: 0
+  CrossHair: {fileID: 1051639427470301143}
 --- !u!120 &21008784207564252
 LineRenderer:
   m_ObjectHideFlags: 0

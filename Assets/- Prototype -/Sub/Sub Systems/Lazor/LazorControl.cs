@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LazorControl : SubsystemTemplate
 {
@@ -26,6 +27,9 @@ public class LazorControl : SubsystemTemplate
 
 	Vector3 startingRotation;
 
+	public RawImage CrossHair; 
+	Color crossColorBase;
+
 
 	void Start()
 	{
@@ -35,6 +39,8 @@ public class LazorControl : SubsystemTemplate
 		Vector3 setRange = rangeTarget.transform.localEulerAngles;
 		setRange.z = range;
 		rangeTarget.transform.localEulerAngles = setRange;
+
+		crossColorBase = CrossHair.color;
 	}
 
 	void Update()
@@ -84,6 +90,7 @@ public class LazorControl : SubsystemTemplate
 			if (Time.time >= cooldownExpire)
 			{
 				lazorOn = false;
+				CrossHair.color = crossColorBase;
 			}
 		}
 	}
@@ -97,6 +104,8 @@ public class LazorControl : SubsystemTemplate
 			lazor.enabled = true;
 			lazorExpire = Time.time + lazorOnTime;
 			cooldownExpire = lazorExpire + cooldownTime;
+			Color cooldowncross = new Color(255,255,255,0.2f);
+			CrossHair.color = cooldowncross;
 		}
 	}
 
