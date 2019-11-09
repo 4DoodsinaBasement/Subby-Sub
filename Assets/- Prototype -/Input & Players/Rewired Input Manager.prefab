@@ -563,6 +563,15 @@ MonoBehaviour:
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 2
+    - _id: 43
+      _name: ToggleZoom
+      _type: 1
+      _descriptiveName: ToggleZoom
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
     actionCategories:
     - _name: Default
       _descriptiveName: Walk
@@ -577,7 +586,7 @@ MonoBehaviour:
     actionCategoryMap:
       list:
       - categoryId: 0
-        actionIds: 000000000e0000000f00000001000000120000001300000002000000030000001400000008000000
+        actionIds: 02000000030000002b000000000000000e0000000f0000000100000012000000130000001400000008000000
       - categoryId: 2
         actionIds: 16000000170000002900000019000000180000002a0000001a0000001b0000001c0000001d0000001e0000001f0000002200000020000000230000002400000025000000260000002700000028000000
     inputBehaviors:
@@ -820,7 +829,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 43
         _elementType: 1
         _elementIdentifierId: 15
         _axisRange: 0
@@ -1311,6 +1320,17 @@ MonoBehaviour:
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
+      - _actionCategoryId: 0
+        _actionId: 43
+        _elementType: 1
+        _elementIdentifierId: 4
+        _axisRange: 0
+        _invert: 0
+        _axisContribution: 0
+        _keyboardKeyCode: 0
+        _modifierKey1: 0
+        _modifierKey2: 0
+        _modifierKey3: 0
     - id: 2
       categoryId: 1
       layoutId: 0
@@ -1367,7 +1387,7 @@ MonoBehaviour:
     controllerMapLayoutManagerRuleSets: []
     controllerMapEnablerRuleSets: []
     playerIdCounter: 5
-    actionIdCounter: 43
+    actionIdCounter: 44
     actionCategoryIdCounter: 5
     inputBehaviorIdCounter: 1
     mapCategoryIdCounter: 4
