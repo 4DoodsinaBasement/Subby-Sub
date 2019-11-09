@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class SonarRenderer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	public SonarEntityType entityType;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	void Start()
+	{
+
+	}
+
+	void Update()
+	{
+
+	}
 }
