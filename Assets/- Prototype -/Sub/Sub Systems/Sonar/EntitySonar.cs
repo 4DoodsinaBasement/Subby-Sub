@@ -11,6 +11,7 @@ public class EntitySonar : MonoBehaviour
 	public GameObject castOrigin;
 	public GameObject drawOrigin;
 	public GameObject sonarGlobe;
+	public GameObject terrainBlipPrefab;
 	public GameObject entityBlipPrefab;
 	public Material friendlyMaterial;
 	public Material neutralMaterial;
@@ -23,24 +24,32 @@ public class EntitySonar : MonoBehaviour
 
 	void Start()
 	{
-		SonarRenderer[] worldEntities = FindObjectsOfType<SonarRenderer>();
+		// Terrain[] worldTerrain = FindObjectsOfType<Terrain>();
+		// foreach (Terrain terrain in worldTerrain)
+		// {
+		// 	for (int x = (int)terrain.terrainData.size.x; i < length; i++)
+		// 	{
 
+		// 	}
+		// }
+
+		SonarRenderer[] worldEntities = FindObjectsOfType<SonarRenderer>();
 		foreach (SonarRenderer worldEntity in worldEntities)
 		{
 			GameObject newMapEntity = Instantiate(entityBlipPrefab, drawOrigin.transform);
 			blips.Add(new EntitySonar_Blip(worldEntity, newMapEntity));
 		}
 
-		RecalculateBlips();
+		EntityBlips();
 	}
 
 	void Update()
 	{
-		RecalculateBlips();
+		EntityBlips();
 	}
 
 
-	void RecalculateBlips()
+	void EntityBlips()
 	{
 		Vector3 localSize = (sonarGlobe.transform.localScale / 2) / sonarRange;
 
