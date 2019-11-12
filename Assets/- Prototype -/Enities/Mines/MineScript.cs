@@ -43,6 +43,7 @@ public class MineScript : MonoBehaviour
 		foreach (HPManager entity in hitEntities)
 		{
 			entity.TakeDamage(baseDamage);
+			Debug.Log("Sending " + baseDamage + " damage to " + entity.name + "!");
 		}
 
 		foreach (Rigidbody rb in hitRigidbodies)
