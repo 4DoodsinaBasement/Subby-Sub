@@ -5,85 +5,87 @@ using UnityEngine;
 public class SubSystemPHManager : MonoBehaviour
 {
 	[Header("Total Sub Health")]
-    [ReadOnly] public float currentSubHealth;
-    [Header("Hull")]
-    public float maxHullHealth;
-    [ReadOnly]public float currentHullHealth;
+	[ReadOnly] public float currentSubHealth;
+	[Header("Hull")]
+	public float maxHullHealth;
+	[ReadOnly] public float currentHullHealth;
 
-	[Header("Generator")] 
-    public float generatorMaxHealth; public int generatorMaxPower;
-	[Header("Steering")] 
-    public float steeringMaxHealth; public int steeringMaxPower;
-	[Header("Buoyancy")] 
-    public float buoyancyMaxHealth; public int buoyancyMaxPower;
-	[Header("Throttle")] 
-    public float throttleMaxHealth; public int throttleMaxPower;
-	[Header("Laser")] 
-    public float laserMaxHealth; public int laserMaxPower;
-	[Header("Sonar")] 
-    public float sonarMaxHealth; public int sonarMaxPower;
-	[Header("Lights")] 
-    public float lightsMaxHealth; public int lightsMaxPower;
-	[Header("Engineering")] 
-    public float engineeringMaxHealth; public int engineeringMaxPower;
+	[Header("Generator")]
+	public float generatorMaxHealth; public int generatorMaxPower;
+	[Header("Steering")]
+	public float steeringMaxHealth; public int steeringMaxPower;
+	[Header("Buoyancy")]
+	public float buoyancyMaxHealth; public int buoyancyMaxPower;
+	[Header("Throttle")]
+	public float throttleMaxHealth; public int throttleMaxPower;
+	[Header("Laser")]
+	public float laserMaxHealth; public int laserMaxPower;
+	[Header("Sonar")]
+	public float sonarMaxHealth; public int sonarMaxPower;
+	[Header("Lights")]
+	public float lightsMaxHealth; public int lightsMaxPower;
+	[Header("Engineering")]
+	public float engineeringMaxHealth; public int engineeringMaxPower;
 
-    [Space(10)]
+	[Space(10)]
 	[Header("Classes")]
-    [ContextMenuItem("Allocate From Generator To Steering", "AllocateFromGeneratorToSteering")]
 	[ReadOnly] public SubSystemPH generator;
+	[ReadOnly] public SubSystemPH engineering;
 	[ReadOnly] public SubSystemPH steering;
-	[ReadOnly] public SubSystemPH buoyancy;
 	[ReadOnly] public SubSystemPH throttle;
-	[ReadOnly] public SubSystemPH laser1;
-	[ReadOnly] public SubSystemPH laser2;
+	[ReadOnly] public SubSystemPH buoyancy;
 	[ReadOnly] public SubSystemPH sonar;
 	[ReadOnly] public SubSystemPH lights;
-	[ReadOnly] public SubSystemPH engineering;
+	[ReadOnly] public SubSystemPH laser1;
+	[ReadOnly] public SubSystemPH laser2;
 
 	List<SubSystemPH> subSystemPHs = new List<SubSystemPH>();
 
 
-    // --- Testing
+	// --- Testing --- //
+	[ContextMenu("Allocate From Generator To Steering")]
     void AllocateFromGeneratorToSteering()
-    {
-        AllocatePower(steering);
-    }
-    // --- Testing
-	
-    
-    void Start()
 	{
-		generator = new SubSystemPH(generatorMaxHealth, generatorMaxPower);
+		AllocatePower(steering);
+	}
+	// --- Testing --- //
 
-		steering = new SubSystemPH(steeringMaxHealth, steeringMaxPower);
-		buoyancy = new SubSystemPH(buoyancyMaxHealth, buoyancyMaxPower);
-		throttle = new SubSystemPH(throttleMaxHealth, throttleMaxPower);
-		laser1 = new SubSystemPH(laserMaxHealth, laserMaxPower);
-		laser2 = new SubSystemPH(laserMaxHealth, laserMaxPower);
-		sonar = new SubSystemPH(sonarMaxHealth, sonarMaxPower);
-		lights = new SubSystemPH(lightsMaxHealth, lightsMaxPower);
-		engineering = new SubSystemPH(engineeringMaxHealth, engineeringMaxPower);
-        
-        subSystemPHs.Add(generator);
 
-		subSystemPHs.Add(steering);
-		subSystemPHs.Add(buoyancy);
-		subSystemPHs.Add(throttle);
-		subSystemPHs.Add(laser1);
-		subSystemPHs.Add(laser2);
-		subSystemPHs.Add(sonar);
-		subSystemPHs.Add(lights);
-		subSystemPHs.Add(engineering);
-
-        generator.currentPower = 5;
+	void Start()
+	{
+		generator = new SubSystemPH(generatorMaxHealth, generatorMaxPower); subSystemPHs.Add(generator);
+		engineering = new SubSystemPH(engineeringMaxHealth, engineeringMaxPower); subSystemPHs.Add(engineering);
+		steering = new SubSystemPH(steeringMaxHealth, steeringMaxPower); subSystemPHs.Add(steering);
+		throttle = new SubSystemPH(throttleMaxHealth, throttleMaxPower); subSystemPHs.Add(throttle);
+		buoyancy = new SubSystemPH(buoyancyMaxHealth, buoyancyMaxPower); subSystemPHs.Add(buoyancy);
+		sonar = new SubSystemPH(sonarMaxHealth, sonarMaxPower); subSystemPHs.Add(sonar);
+		lights = new SubSystemPH(lightsMaxHealth, lightsMaxPower); subSystemPHs.Add(lights);
+		laser1 = new SubSystemPH(laserMaxHealth, laserMaxPower); subSystemPHs.Add(laser1);
+		laser2 = new SubSystemPH(laserMaxHealth, laserMaxPower); subSystemPHs.Add(laser2);
 
 		currentHullHealth = maxHullHealth;
+		InitializeGenerator();
+
 		UpdateSubHealth();
 	}
 
 	void Update()
 	{
 		UpdateSubHealth();
+	}
+
+	void InitializeGenerator()
+	{
+		generator.currentPower = generator.maxPower;
+        
+        foreach (SubSystemPH system in subSystemPHs)
+        {
+			if(system != generator && generator.currentPower > 0)
+            {
+				system.currentPower++;
+				generator.currentPower--;
+			}
+		}
 	}
 
 	void UpdateSubHealth()
@@ -98,14 +100,20 @@ public class SubSystemPHManager : MonoBehaviour
 
 	public void AllocatePower(SubSystemPH subsystem)
 	{
-		generator.currentPower--;
-		subsystem.currentPower++;
+		if (subsystem.currentPower < subsystem.currentMaxPower && generator.currentPower > 0)
+		{
+			subsystem.currentPower++;
+			generator.currentPower--;
+		}
 	}
 
 	public void DeallocatePower(SubSystemPH subsystem)
 	{
-		generator.currentPower++;
-		subsystem.currentPower--;
+		if (subsystem.currentPower > 0)
+		{
+			subsystem.currentPower--;
+			generator.currentPower++;
+		}
 	}
 }
 
@@ -147,6 +155,5 @@ public class SubSystemPH
 
 		this.maxPower = maxPower;
 		this.currentMaxPower = maxPower;
-		this._currentPower = 1;
 	}
 }
