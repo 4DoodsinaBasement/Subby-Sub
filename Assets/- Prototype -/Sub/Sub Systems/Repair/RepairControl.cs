@@ -2,14 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthControl : SubsystemTemplate
+public class RepairControl : SubsystemTemplate
 {
-	public int healAmount = 5;
+	public float repairAmount = 5;
 
-	void SubHeal()
+	bool leftHalf, rightHalf;
+
+	[ReadOnly] public string systemToRepair; // This is set by PlayerSystemControl
+
+	void Update()
 	{
-		manager.SubToManage.GetComponent<HPManager>().currentHP += healAmount;
+		GetSystemToRepair();
 	}
+
+	void GetSystemToRepair()
+	{
+		if (systemToRepair != null)
+		{
+			systemToRepair = systemToRepair.ToLower();
+			if (systemToRepair != "repair" && leftHalf && rightHalf)
+			{
+				foreach (SubSystemPH item in manager.subPHMmanager.subSystemPHs)
+				{
+					if (systemToRepair == item.name.ToLower())
+					{
+						Debug.Log("Repairing subsystem " + systemToRepair);
+						manager.subPHMmanager.RepairSubSystem(item, repairAmount);
+					}
+				}
+			}
+		}
+	}
+
+
 	public override void LeftStickX(float value) { }
 	public override void LeftStickY(float value) { }
 	public override void RightStickX(float value) { }
@@ -30,17 +55,17 @@ public class HealthControl : SubsystemTemplate
 	public override void ButtonSouth_Down() { }
 	public override void ButtonEast() { }
 	public override void ButtonEast_Up() { }
-	public override void ButtonEast_Down() { SubHeal(); }
+	public override void ButtonEast_Down() { }
 	public override void ButtonWest() { }
 	public override void ButtonWest_Up() { }
 	public override void ButtonWest_Down() { }
 
 	public override void LeftTrigger() { }
-	public override void LeftTrigger_Up() { }
-	public override void LeftTrigger_Down() { }
+	public override void LeftTrigger_Up() { leftHalf = false; }
+	public override void LeftTrigger_Down() { leftHalf = true; }
 	public override void RightTrigger() { }
-	public override void RightTrigger_Up() { }
-	public override void RightTrigger_Down() { }
+	public override void RightTrigger_Up() { rightHalf = false; }
+	public override void RightTrigger_Down() { rightHalf = true; }
 	public override void LeftBumper() { }
 	public override void LeftBumper_Up() { }
 	public override void LeftBumper_Down() { }

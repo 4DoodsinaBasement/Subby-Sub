@@ -334,7 +334,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: -1}
 --- !u!114 &535466856086327184
 MonoBehaviour:
@@ -349,6 +349,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
+  overrideMove: 1
+  overrideLook: 0
   cam: {fileID: 6010202750402809104}
   XmaxAngle: 50
   YmaxAngle: 50

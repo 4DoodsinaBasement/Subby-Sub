@@ -18,8 +18,8 @@ public class SubSystemPHManager : MonoBehaviour
 	public float buoyancyMaxHealth; public int buoyancyMaxPower;
 	[Header("Throttle")]
 	public float throttleMaxHealth; public int throttleMaxPower;
-	[Header("Laser")]
-	public float laserMaxHealth; public int laserMaxPower;
+	[Header("Lazor")]
+	public float lazorMaxHealth; public int lazorMaxPower;
 	[Header("Sonar")]
 	public float sonarMaxHealth; public int sonarMaxPower;
 	[Header("Lights")]
@@ -36,32 +36,36 @@ public class SubSystemPHManager : MonoBehaviour
 	[ReadOnly] public SubSystemPH buoyancy;
 	[ReadOnly] public SubSystemPH sonar;
 	[ReadOnly] public SubSystemPH lights;
-	[ReadOnly] public SubSystemPH laser1;
-	[ReadOnly] public SubSystemPH laser2;
-
-	List<SubSystemPH> subSystemPHs = new List<SubSystemPH>();
+	[ReadOnly] public SubSystemPH lazor1;
+	[ReadOnly] public SubSystemPH lazor2;
+	public List<SubSystemPH> subSystemPHs = new List<SubSystemPH>();
 
 
 	// --- Testing --- //
 	[ContextMenu("Allocate From Generator To Steering")]
-    void AllocateFromGeneratorToSteering()
+	void AllocateFromGeneratorToSteering()
 	{
 		AllocatePower(steering);
+	}
+	[ContextMenu("Damage Steering By 10")]
+	void DamageSteeringBy10()
+	{
+		steering.currentHealth -= 10;
 	}
 	// --- Testing --- //
 
 
 	void Start()
 	{
-		generator = new SubSystemPH(generatorMaxHealth, generatorMaxPower); subSystemPHs.Add(generator);
-		engineering = new SubSystemPH(engineeringMaxHealth, engineeringMaxPower); subSystemPHs.Add(engineering);
-		steering = new SubSystemPH(steeringMaxHealth, steeringMaxPower); subSystemPHs.Add(steering);
-		throttle = new SubSystemPH(throttleMaxHealth, throttleMaxPower); subSystemPHs.Add(throttle);
-		buoyancy = new SubSystemPH(buoyancyMaxHealth, buoyancyMaxPower); subSystemPHs.Add(buoyancy);
-		sonar = new SubSystemPH(sonarMaxHealth, sonarMaxPower); subSystemPHs.Add(sonar);
-		lights = new SubSystemPH(lightsMaxHealth, lightsMaxPower); subSystemPHs.Add(lights);
-		laser1 = new SubSystemPH(laserMaxHealth, laserMaxPower); subSystemPHs.Add(laser1);
-		laser2 = new SubSystemPH(laserMaxHealth, laserMaxPower); subSystemPHs.Add(laser2);
+		generator = new SubSystemPH("generator", generatorMaxHealth, generatorMaxPower); subSystemPHs.Add(generator);
+		engineering = new SubSystemPH("engineering", engineeringMaxHealth, engineeringMaxPower); subSystemPHs.Add(engineering);
+		steering = new SubSystemPH("steering", steeringMaxHealth, steeringMaxPower); subSystemPHs.Add(steering);
+		throttle = new SubSystemPH("throttle", throttleMaxHealth, throttleMaxPower); subSystemPHs.Add(throttle);
+		buoyancy = new SubSystemPH("buoyancy", buoyancyMaxHealth, buoyancyMaxPower); subSystemPHs.Add(buoyancy);
+		sonar = new SubSystemPH("sonar", sonarMaxHealth, sonarMaxPower); subSystemPHs.Add(sonar);
+		lights = new SubSystemPH("lights", lightsMaxHealth, lightsMaxPower); subSystemPHs.Add(lights);
+		lazor1 = new SubSystemPH("lazor1", lazorMaxHealth, lazorMaxPower); subSystemPHs.Add(lazor1);
+		lazor2 = new SubSystemPH("lazor2", lazorMaxHealth, lazorMaxPower); subSystemPHs.Add(lazor2);
 
 		currentHullHealth = maxHullHealth;
 		InitializeGenerator();
@@ -77,11 +81,11 @@ public class SubSystemPHManager : MonoBehaviour
 	void InitializeGenerator()
 	{
 		generator.currentPower = generator.maxPower;
-        
-        foreach (SubSystemPH system in subSystemPHs)
-        {
-			if(system != generator && generator.currentPower > 0)
-            {
+
+		foreach (SubSystemPH system in subSystemPHs)
+		{
+			if (system != generator && generator.currentPower > 0)
+			{
 				system.currentPower++;
 				generator.currentPower--;
 			}
@@ -115,11 +119,22 @@ public class SubSystemPHManager : MonoBehaviour
 			generator.currentPower++;
 		}
 	}
+
+	public void RepairSubSystem(SubSystemPH systemToRepair, float amount)
+	{
+		if (systemToRepair == null) { return; }
+		else
+		{
+			systemToRepair.currentHealth += amount;
+		}
+	}
 }
 
 [System.Serializable]
 public class SubSystemPH
 {
+	public string name;
+
 	[ReadOnly] public float maxHealth;
 	[HideInInspector] public float currentMaxHealth;
 	[SerializeField] [ReadOnly] private float _currentHealth; public float currentHealth
@@ -147,8 +162,10 @@ public class SubSystemPH
 		}
 	}
 
-	public SubSystemPH(float maxHealth, int maxPower)
+	public SubSystemPH(string name, float maxHealth, int maxPower)
 	{
+		this.name = name;
+
 		this.maxHealth = maxHealth;
 		this.currentMaxHealth = maxHealth;
 		this.currentHealth = maxHealth;

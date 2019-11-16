@@ -46,9 +46,9 @@ public class PlayerFPS : MonoBehaviour
 		if (player != null)
 		{
 			PlayerLook();
-			PlayerZoom();
 			PlayerMove();
-			PlayerJump();
+			if (player.GetButtonDown("ToggleZoom")) { PlayerZoom(); }
+			if (player.GetButtonDown("Jump") && grounded) { PlayerJump(); }
 		}
 	}
 
@@ -90,19 +90,40 @@ public class PlayerFPS : MonoBehaviour
 		transform.Rotate(Vector3.up, deltaLook.x, Space.Self);
 	}
 
+	public void PlayerLook(float xAxis, float yAxis)
+	{
+		deltaLook = new Vector2(xAxis, yAxis);
+		deltaLook = deltaLook * lookSensitivity;
+
+		verticalClamp += deltaLook.y;
+
+		if (verticalClamp > 90.0f)
+		{
+			verticalClamp = 90.0f;
+			deltaLook.y = 0;
+			ClampCamera(270.0f);
+		}
+		if (verticalClamp < -90.0f)
+		{
+			verticalClamp = -90.0f;
+			deltaLook.y = 0;
+			ClampCamera(90.0f);
+		}
+
+		playerCamera.Rotate(Vector3.left, deltaLook.y);
+		transform.Rotate(Vector3.up, deltaLook.x, Space.Self);
+	}
+
+	public void PlayerZoom()
+	{
+		cameraZoomed = !cameraZoomed;
+	}
+
 	void ClampCamera(float clampValue)
 	{
 		Vector3 clampedRotation = playerCamera.eulerAngles;
 		clampedRotation.x = clampValue;
 		playerCamera.eulerAngles = clampedRotation;
-	}
-
-	void PlayerZoom()
-	{
-		if (player.GetButtonDown("ToggleZoom"))
-		{
-			cameraZoomed = !cameraZoomed;
-		}
 	}
 
 	Vector3 velocityAtJump = Vector3.zero;
@@ -136,13 +157,40 @@ public class PlayerFPS : MonoBehaviour
 		rb.AddForce(new Vector3(0, -gravity * rb.mass, 0));
 	}
 
-	void PlayerJump()
+	public void PlayerMove(float xAxis, float yAxis)
 	{
-		if (player.GetButtonDown("Jump") && grounded)
+		Vector3 inputVector3 = new Vector3(xAxis, 0, yAxis);
+
+		if (inputVector3 != Vector3.zero)
 		{
-			rb.AddForce(new Vector3(0, jumpForce * 100, 0));
-			velocityAtJump = transform.InverseTransformDirection(rb.velocity);
+			Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
+
+			Vector3 addVelocityFromSub = Vector3.zero;
+			if (GetComponent<RigidbodyChild>() != null && GetComponent<RigidbodyChild>().parentRigidbody != null) { addVelocityFromSub = GetComponent<RigidbodyChild>().parentRigidbody.velocity; }
+
+			if (grounded)
+			{
+				localVelocity.x = inputVector3.x * moveSpeed;
+				localVelocity.z = inputVector3.z * moveSpeed;
+			}
+			else
+			{
+				localVelocity.x = (velocityAtJump.x * (1.0f - airMovePercent)) + ((inputVector3.x * moveSpeed) * airMovePercent);
+				localVelocity.z = (velocityAtJump.z * (1.0f - airMovePercent)) + ((inputVector3.z * moveSpeed) * airMovePercent);
+			}
+
+			addVelocityFromSub.y = 0f;
+
+			rb.velocity = (transform.TransformDirection(localVelocity) + addVelocityFromSub);
 		}
+
+		rb.AddForce(new Vector3(0, -gravity * rb.mass, 0));
+	}
+
+	public void PlayerJump()
+	{
+		rb.AddForce(new Vector3(0, jumpForce * 100, 0));
+		velocityAtJump = transform.InverseTransformDirection(rb.velocity);
 	}
 	#endregion
 }

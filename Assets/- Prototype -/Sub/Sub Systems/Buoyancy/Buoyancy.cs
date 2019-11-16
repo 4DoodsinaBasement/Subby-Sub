@@ -7,15 +7,15 @@ public class Buoyancy : SubsystemTemplate
 	public float deltaBuoyancy = 30; // (percent / second)
 
 
-	public void KillSwitch() { manager.SubToManage.buoyancy = 0; }
+	public void KillSwitch() { manager.subToManage.buoyancy = 0; }
 
 	void UpdateDepth(float value)
 	{
 		if (value != 0)
 		{
 			value = Mathf.Pow(value, manager.axisCurveFactor);
-			manager.SubToManage.buoyancy += (((deltaBuoyancy * value) / 100) * Time.deltaTime);
-			manager.SubToManage.buoyancy = Mathf.Clamp(manager.SubToManage.buoyancy, -1f, 1f);
+			manager.subToManage.buoyancy += (((deltaBuoyancy * value) / 100) * Time.deltaTime);
+			manager.subToManage.buoyancy = Mathf.Clamp(manager.subToManage.buoyancy, -1f, 1f);
 		}
 	}
 

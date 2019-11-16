@@ -237,7 +237,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Health
+  m_Text: Repair
 --- !u!1 &929937005881751656
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,9 +280,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1420439465607368328}
   - component: {fileID: 6836601007539180719}
-  - component: {fileID: 4560929757888819399}
+  - component: {fileID: 2917993105433093029}
   m_Layer: 0
-  m_Name: Health
+  m_Name: Repair
   m_TagString: System
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -316,7 +316,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4560929757888819399
+--- !u!114 &2917993105433093029
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -325,11 +325,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1911043287016237175}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ead54c5f9a9d3c4c9f1d44a565d3801, type: 3}
+  m_Script: {fileID: 11500000, guid: 7676a3512af0f8946bd0bd1aa9d6ac13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
-  healAmount: 5
+  overrideMove: 0
+  overrideLook: 0
+  repairAmount: 0.5
+  systemToRepair: 
 --- !u!1 &4454389540378151669
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +436,7 @@ GameObject:
   - component: {fileID: 7641019745345501294}
   - component: {fileID: 1711923184236888367}
   m_Layer: 5
-  m_Name: Healing Placeholder
+  m_Name: Repair Placeholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -507,7 +510,7 @@ GameObject:
   - component: {fileID: 8155060546720823271}
   - component: {fileID: 6197212007128881912}
   m_Layer: 5
-  m_Name: Health Value
+  m_Name: Repair Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -586,7 +589,7 @@ GameObject:
   - component: {fileID: 5817767670854292195}
   - component: {fileID: 5338727121245681488}
   m_Layer: 5
-  m_Name: Healing Progress
+  m_Name: Repair Progress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

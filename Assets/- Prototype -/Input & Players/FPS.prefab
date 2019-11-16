@@ -477,7 +477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 6237044838565948418}
-  lookSensitivity: 3
+  lookSensitivity: 5
   normalFOV: 60
   zoomFOV: 20
   moveSpeed: 5

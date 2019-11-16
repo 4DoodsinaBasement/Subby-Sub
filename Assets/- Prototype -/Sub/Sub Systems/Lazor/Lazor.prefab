@@ -5210,7 +5210,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: -1}
 --- !u!114 &499566177660137356
 MonoBehaviour:
@@ -5225,6 +5225,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
+  overrideMove: 1
+  overrideLook: 0
   cam: {fileID: 7593709145802500266}
   rangeTarget: {fileID: 3249270597232333912}
   hitParticles: {fileID: 912465707370331469}
