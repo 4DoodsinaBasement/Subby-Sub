@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class SubSystemPHManager : MonoBehaviour
 	[Header("Hull")]
 	public float maxHullHealth;
 	[ReadOnly] public float currentHullHealth;
+	[Header("Damage Group Size")]
+	public float damageGroupSize;
 
 	[Header("Generator")]
 	public float generatorMaxHealth; public int generatorMaxPower;
@@ -27,17 +30,17 @@ public class SubSystemPHManager : MonoBehaviour
 	[Header("Engineering")]
 	public float engineeringMaxHealth; public int engineeringMaxPower;
 
-	[Space(10)]
+	[Space(20)]
 	[Header("Classes")]
-	[ReadOnly] public SubSystemPH generator;
-	[ReadOnly] public SubSystemPH engineering;
-	[ReadOnly] public SubSystemPH steering;
-	[ReadOnly] public SubSystemPH throttle;
-	[ReadOnly] public SubSystemPH buoyancy;
-	[ReadOnly] public SubSystemPH sonar;
-	[ReadOnly] public SubSystemPH lights;
-	[ReadOnly] public SubSystemPH lazor1;
-	[ReadOnly] public SubSystemPH lazor2;
+	[HideInInspector] public SubSystemPH generator;
+	[HideInInspector] public SubSystemPH engineering;
+	[HideInInspector] public SubSystemPH steering;
+	[HideInInspector] public SubSystemPH throttle;
+	[HideInInspector] public SubSystemPH buoyancy;
+	[HideInInspector] public SubSystemPH sonar;
+	[HideInInspector] public SubSystemPH lights;
+	[HideInInspector] public SubSystemPH lazor1;
+	[HideInInspector] public SubSystemPH lazor2;
 	public List<SubSystemPH> subSystemPHs = new List<SubSystemPH>();
 
 
@@ -70,12 +73,12 @@ public class SubSystemPHManager : MonoBehaviour
 		currentHullHealth = maxHullHealth;
 		InitializeGenerator();
 
-		UpdateSubHealth();
+		UpdateSubTotalHealth();
 	}
 
 	void Update()
 	{
-		UpdateSubHealth();
+		UpdateSubTotalHealth();
 	}
 
 	void InitializeGenerator()
@@ -92,7 +95,7 @@ public class SubSystemPHManager : MonoBehaviour
 		}
 	}
 
-	void UpdateSubHealth()
+	void UpdateSubTotalHealth()
 	{
 		float newSubHealth = 0;
 		foreach (SubSystemPH item in subSystemPHs)
@@ -100,6 +103,41 @@ public class SubSystemPHManager : MonoBehaviour
 			newSubHealth += item.currentHealth;
 		}
 		currentSubHealth = newSubHealth;
+	}
+
+	public void AssignDamage(float damage)
+	{
+		float damageRemaining = damage;
+
+		List<SubSystemPH> activeSubsystems = subSystemPHs.Where(i => i.currentHealth > 0).ToList();
+
+		while (damageRemaining > 0)
+		{
+			SubSystemPH subSystemToDamage = activeSubsystems[(int)Random.Range(0, subSystemPHs.Count)];
+
+			if (subSystemToDamage != null)
+			{
+				float damageToDeal = (damageRemaining >= damageGroupSize) ? damageGroupSize : damageRemaining;
+
+				if (subSystemToDamage.currentHealth >= damageToDeal)
+				{
+					subSystemToDamage.currentHealth -= damageToDeal;
+				}
+				else
+				{
+					damageToDeal -= subSystemToDamage.currentHealth;
+					subSystemToDamage.currentHealth = 0;
+					activeSubsystems.Remove(subSystemToDamage);
+				}
+
+				damageRemaining -= damageToDeal;
+			}
+			else
+			{
+				Debug.Log("There was " + damageRemaining + " damage remaining and YOU DIED!");
+				break;
+			}
+		}
 	}
 
 	public void AllocatePower(SubSystemPH subsystem)

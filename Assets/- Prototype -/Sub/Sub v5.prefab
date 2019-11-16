@@ -561,10 +561,10 @@ GameObject:
   - component: {fileID: 7093843797845048801}
   - component: {fileID: 7093843797845048813}
   - component: {fileID: 7093843797845048802}
-  - component: {fileID: 7093843797845048803}
-  - component: {fileID: 7093843797845048800}
   - component: {fileID: 8812881246952749779}
+  - component: {fileID: 7732789221772436523}
   - component: {fileID: 7389865313495242402}
+  - component: {fileID: 7093843797845048800}
   - component: {fileID: 780905757212291247}
   m_Layer: 10
   m_Name: Sub v5
@@ -614,48 +614,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7093843797845048806}
   m_Enabled: 1
---- !u!114 &7093843797845048803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7093843797845048806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 541c78a8d657f5642a2c662fbe04b0ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyOnDeath: 0
-  maxHP: 200
-  _currentHP: 0
---- !u!114 &7093843797845048800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7093843797845048806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4583f775927580a4eba606d8af7bc580, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  throttle: 0
-  accThrottle: 3
-  maxSpeed_horizontal: 10
-  buoyancy: 0
-  accBuoyancy: 3
-  maxSpeed_vertical: 3
-  steering: 0
-  accSteering: 2
-  SubHealth: {fileID: 7435218889822015725}
-  SteeringHeading: {fileID: 5436267881781355794}
-  SteeringTurning: {fileID: 5436267881728069157}
-  ThrottleSpeed: {fileID: 7116014601701743279}
-  ThrottlePower: {fileID: 7116014600930951100}
-  BuoyancyDepth: {fileID: 3231586940717381308}
-  BuoyancyPower: {fileID: 3231586939525003292}
 --- !u!82 &8812881246952749779
 AudioSource:
   m_ObjectHideFlags: 0
@@ -752,6 +710,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7732789221772436523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7093843797845048806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dc5e90dd9267314abb9540231203d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyOnDeath: 1
+  maxHP: 2000
+  _currentHP: 0
 --- !u!65 &7389865313495242402
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -765,6 +738,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 28, y: 11, z: 36}
   m_Center: {x: 0, y: 3, z: 0}
+--- !u!114 &7093843797845048800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7093843797845048806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4583f775927580a4eba606d8af7bc580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throttle: 0
+  accThrottle: 3
+  maxSpeed_horizontal: 10
+  buoyancy: 0
+  accBuoyancy: 3
+  maxSpeed_vertical: 3
+  steering: 0
+  accSteering: 2
+  SubHealth: {fileID: 7435218889822015725}
+  SteeringHeading: {fileID: 5436267881781355794}
+  SteeringTurning: {fileID: 5436267881728069157}
+  ThrottleSpeed: {fileID: 7116014601701743279}
+  ThrottlePower: {fileID: 7116014600930951100}
+  BuoyancyDepth: {fileID: 3231586940717381308}
+  BuoyancyPower: {fileID: 3231586939525003292}
 --- !u!114 &780905757212291247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -780,6 +780,7 @@ MonoBehaviour:
   currentSubHealth: 0
   maxHullHealth: 20
   currentHullHealth: 0
+  damageGroupSize: 0
   generatorMaxHealth: 100
   generatorMaxPower: 5
   steeringMaxHealth: 100
@@ -788,8 +789,8 @@ MonoBehaviour:
   buoyancyMaxPower: 5
   throttleMaxHealth: 100
   throttleMaxPower: 5
-  laserMaxHealth: 100
-  laserMaxPower: 5
+  lazorMaxHealth: 100
+  lazorMaxPower: 5
   sonarMaxHealth: 100
   sonarMaxPower: 5
   lightsMaxHealth: 100
@@ -852,22 +853,22 @@ MonoBehaviour:
     maxPower: 5
     currentMaxPower: 5
     _currentPower: 5
-  laser1:
+  lazor1:
     name: 
-    maxHealth: 100
-    currentMaxHealth: 100
-    _currentHealth: 100
-    maxPower: 5
-    currentMaxPower: 5
-    _currentPower: 5
-  laser2:
+    maxHealth: 0
+    currentMaxHealth: 0
+    _currentHealth: 0
+    maxPower: 0
+    currentMaxPower: 0
+    _currentPower: 0
+  lazor2:
     name: 
-    maxHealth: 100
-    currentMaxHealth: 100
-    _currentHealth: 100
-    maxPower: 5
-    currentMaxPower: 5
-    _currentPower: 5
+    maxHealth: 0
+    currentMaxHealth: 0
+    _currentHealth: 0
+    maxPower: 0
+    currentMaxPower: 0
+    _currentPower: 0
   subSystemPHs: []
 --- !u!1 &7093843797911539502
 GameObject:
