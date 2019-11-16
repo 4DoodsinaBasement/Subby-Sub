@@ -9,13 +9,13 @@ public class HPManager : MonoBehaviour
 
 	[SerializeField]
 	[ReadOnly]
-	private float _currentHP; public float currentHP
+	private float _currentHP; public virtual float currentHP
 	{
 		get { return _currentHP; }
 		set { _currentHP = value; if (_currentHP > maxHP) { _currentHP = maxHP; } }
 	}
 
-	public void TakeDamage(float damage)
+	public virtual void TakeDamage(float damage)
 	{
 		currentHP -= damage;
 	}

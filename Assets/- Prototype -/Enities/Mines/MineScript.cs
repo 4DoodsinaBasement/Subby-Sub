@@ -48,7 +48,7 @@ public class MineScript : MonoBehaviour
 
 		foreach (Rigidbody rb in hitRigidbodies)
 		{
-			rb.AddExplosionForce(blastForce, transform.position, blastRadius, 0f, ForceMode.VelocityChange);
+			rb.AddExplosionForce(blastForce, transform.position, blastRadius, 0f, ForceMode.Impulse);
 		}
 	}
 
