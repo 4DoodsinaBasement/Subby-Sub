@@ -284,7 +284,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Engineering
+  m_Text: Generator
 --- !u!1 &2956608929980339554
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,9 +295,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2956608929980339485}
   - component: {fileID: 2956608929980339487}
-  - component: {fileID: 2896083232943104520}
+  - component: {fileID: 11502197897265528}
   m_Layer: 0
-  m_Name: Engineering
+  m_Name: Generator
   m_TagString: System
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -331,7 +331,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2896083232943104520
+--- !u!114 &11502197897265528
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -340,7 +340,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2956608929980339554}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d9896d360c315649a5856aa77fb0cd1, type: 3}
+  m_Script: {fileID: 11500000, guid: 517093320f895d1459169555f151024e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
@@ -404,7 +404,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1ac1a66c130d4214695247bdd0d94e77, type: 2}
+  - {fileID: 2100000, guid: 080b777ce6c077b49901b873ef2568cc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
