@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class EngineeringControl : SubsystemTemplate
 {
-
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Q))
+		{
+			manager.subPHMmanager.AllocatePower(manager.subPHMmanager.engineering);
+		}
+		if (Input.GetKeyDown(KeyCode.A))
+		{
+			manager.subPHMmanager.DeallocatePower(manager.subPHMmanager.engineering);
+		}
+	}
 
 
 	public override void LeftStickX(float value) { }

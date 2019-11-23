@@ -174,7 +174,7 @@ public class SubSystemPH
 	public string name;
 
 	[ReadOnly] public float maxHealth;
-	[HideInInspector] public float currentMaxHealth;
+	[ReadOnly] public float currentMaxHealth;
 	[SerializeField] [ReadOnly] private float _currentHealth; public float currentHealth
 	{
 		get { return _currentHealth; }
@@ -188,7 +188,7 @@ public class SubSystemPH
 	}
 
 	[ReadOnly] public int maxPower;
-	[HideInInspector] public int currentMaxPower;
+	[ReadOnly] public int currentMaxPower;
 	[SerializeField] [ReadOnly] private int _currentPower; public int currentPower
 	{
 		get { return _currentPower; }
