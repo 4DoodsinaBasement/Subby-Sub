@@ -130,12 +130,24 @@ public class SubSystemPHManager : MonoBehaviour
 					activeSubsystems.Remove(subSystemToDamage);
 				}
 
+				UpdateSystemPower(subSystemToDamage);
 				damageRemaining -= damageToDeal;
 			}
 			else
 			{
 				Debug.Log("There was " + damageRemaining + " damage remaining and YOU DIED!");
 				break;
+			}
+		}
+	}
+
+	void UpdateSystemPower(SubSystemPH systemToUpdate)
+	{
+		if (systemToUpdate.name.ToLower() != "generator")
+		{
+			while (systemToUpdate.currentPower != 0 && systemToUpdate.currentPower > systemToUpdate.currentMaxPower)
+			{
+				DeallocatePower(systemToUpdate);
 			}
 		}
 	}
@@ -180,10 +192,10 @@ public class SubSystemPH
 		get { return _currentHealth; }
 		set
 		{
-			currentMaxPower = (int)Mathf.Ceil((float)(maxPower) * (value / maxHealth));
 			_currentHealth = value;
 			if (_currentHealth > maxHealth) { _currentHealth = maxHealth; }
 			if (_currentHealth < 0) { _currentHealth = 0; }
+			currentMaxPower = (int)Mathf.Ceil((float)(maxPower) * (_currentHealth / maxHealth));
 		}
 	}
 
