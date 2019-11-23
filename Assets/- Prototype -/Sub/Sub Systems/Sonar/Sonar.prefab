@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4062601052586293147}
   - component: {fileID: 2425137982886875943}
   - component: {fileID: 3676548510193284336}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Downward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4915805612265381820}
   - component: {fileID: 3809189457234222149}
   - component: {fileID: 2863526636826701817}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Deck 2 Windows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 796286359057420629}
   - component: {fileID: 8140989628218577049}
   - component: {fileID: 8226524359563545272}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Deck 1 Windows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1117208771242644607}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Back Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -281,9 +281,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6506477376690359944}
   - component: {fileID: 1454391338198198591}
-  m_Layer: 0
+  - component: {fileID: 8730494290932318416}
+  - component: {fileID: 3017271329489602712}
+  m_Layer: 11
   m_Name: Sonar
-  m_TagString: Untagged
+  m_TagString: System
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -331,6 +333,34 @@ MonoBehaviour:
   sonarRange: 200
   terrainResolution: 25
   refreshRate: 0
+--- !u!114 &8730494290932318416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722817492213006492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a147d3f315240b544a19fdd8d0d621e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 0}
+  overrideMove: 1
+  overrideLook: 1
+--- !u!135 &3017271329489602712
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722817492213006492}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.6
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &781482811364402792
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +372,7 @@ GameObject:
   - component: {fileID: 1122495037894724636}
   - component: {fileID: 7122698672843199265}
   - component: {fileID: 2039598752700553659}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Front Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -417,7 +447,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4893011017043238537}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Front Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,7 +489,7 @@ GameObject:
   - component: {fileID: 4258961518347888174}
   - component: {fileID: 3882528485532762296}
   - component: {fileID: 2847474124794502697}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ladder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -536,7 +566,7 @@ GameObject:
   - component: {fileID: 6445630776526745565}
   - component: {fileID: 7601637565526927182}
   - component: {fileID: 8545265697841931688}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Deck 1 Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -613,7 +643,7 @@ GameObject:
   - component: {fileID: 7845046140311655183}
   - component: {fileID: 463779109081944882}
   - component: {fileID: 7946284563771208281}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Deck 2 Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -688,7 +718,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3640623758621574927}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Draw Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -725,7 +755,7 @@ GameObject:
   - component: {fileID: 1694382596828824995}
   - component: {fileID: 3694120687573641614}
   - component: {fileID: 7388524213551752655}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Horizontal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -800,7 +830,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1171777118424853457}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cast Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -832,7 +862,7 @@ GameObject:
   - component: {fileID: 3691638496887528462}
   - component: {fileID: 101758888277083268}
   - component: {fileID: 2090076779468721475}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Forward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -909,7 +939,7 @@ GameObject:
   - component: {fileID: 7643975797649782700}
   - component: {fileID: 4013956615381364767}
   - component: {fileID: 1666691564912916026}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Deck 1 Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -986,7 +1016,7 @@ GameObject:
   - component: {fileID: 1795638512018887733}
   - component: {fileID: 6851193074268640891}
   - component: {fileID: 347687509712323425}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Front Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1063,7 +1093,7 @@ GameObject:
   - component: {fileID: 5165284504033183153}
   - component: {fileID: 430755914440064850}
   - component: {fileID: 6931429380204672054}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ladder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1140,7 +1170,7 @@ GameObject:
   - component: {fileID: 6612461915363276216}
   - component: {fileID: 3860502230489857662}
   - component: {fileID: 6644341089653089295}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Deck 1 Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1215,7 +1245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4077189896967353685}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1247,7 +1277,7 @@ GameObject:
   - component: {fileID: 3226428911240522538}
   - component: {fileID: 5790577170192199337}
   - component: {fileID: 3581497520731797475}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Vertical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1324,7 +1354,7 @@ GameObject:
   - component: {fileID: 5895908544283809354}
   - component: {fileID: 4756625381866029013}
   - component: {fileID: 389553010288961222}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Deck 2 Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1401,7 +1431,7 @@ GameObject:
   - component: {fileID: 1408868520541801945}
   - component: {fileID: 1498723152942597602}
   - component: {fileID: 2507130607913565828}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Deck 1 Windows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1478,7 +1508,7 @@ GameObject:
   - component: {fileID: 1382595117627132360}
   - component: {fileID: 4397272071460637265}
   - component: {fileID: 6114845085675343087}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sub Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1555,7 +1585,7 @@ GameObject:
   - component: {fileID: 2209530023903365046}
   - component: {fileID: 9024811001207370890}
   - component: {fileID: 1506331791860652629}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Front WIndow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1632,7 +1662,7 @@ GameObject:
   - component: {fileID: 7929611679862549470}
   - component: {fileID: 7133024472344128662}
   - component: {fileID: 3142282757700587315}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Deck 2 Windows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1709,7 +1739,7 @@ GameObject:
   - component: {fileID: 4213774035487566925}
   - component: {fileID: 8822313877045309933}
   - component: {fileID: 7706546925687086286}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Front WIndow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1786,7 +1816,7 @@ GameObject:
   - component: {fileID: 3394890657137695596}
   - component: {fileID: 2367637562009036967}
   - component: {fileID: 5127821143771445979}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Deck 1 Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1863,7 +1893,7 @@ GameObject:
   - component: {fileID: 7475827047244975555}
   - component: {fileID: 1201085112351724018}
   - component: {fileID: 6257679611839763519}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Deck 2 Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1940,7 +1970,7 @@ GameObject:
   - component: {fileID: 1968500977538309765}
   - component: {fileID: 4193878503468803365}
   - component: {fileID: 5298761974568455795}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Deck 2 Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2015,7 +2045,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6185208469981383580}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Entities
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2047,7 +2077,7 @@ GameObject:
   - component: {fileID: 3207101840702772227}
   - component: {fileID: 2218714203531170172}
   - component: {fileID: 3811700384120949982}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2124,7 +2154,7 @@ GameObject:
   - component: {fileID: 2471792155649615370}
   - component: {fileID: 3348019280416847709}
   - component: {fileID: 5218006409356303839}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Globe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2203,7 +2233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5252901247968330263}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sub Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2238,7 +2268,7 @@ GameObject:
   - component: {fileID: 1531588555329863802}
   - component: {fileID: 3074864609117027833}
   - component: {fileID: 672162988553158573}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
