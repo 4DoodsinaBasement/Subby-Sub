@@ -782,9 +782,9 @@ MonoBehaviour:
   currentSubHealth: 0
   maxHullHealth: 20
   currentHullHealth: 0
-  damageGroupSize: 0
+  damageGroupSize: 5
   generatorMaxHealth: 100
-  generatorMaxPower: 5
+  generatorMaxPower: 10
   steeringMaxHealth: 100
   steeringMaxPower: 5
   buoyancyMaxHealth: 100

@@ -150,6 +150,24 @@ public class SubSystemPHManager : MonoBehaviour
 				DeallocatePower(systemToUpdate);
 			}
 		}
+		else
+		{
+			int totalPowerAllocated = 0;
+			foreach (SubSystemPH item in subSystemPHs) { totalPowerAllocated += item.currentPower; }
+			while (systemToUpdate.currentPower + totalPowerAllocated > systemToUpdate.currentMaxPower)
+			{
+				if (systemToUpdate.currentPower > 0)
+				{
+					systemToUpdate.currentPower--;
+				}
+				else
+				{
+					DeallocatePower(subSystemPHs[(int)Random.Range(0, subSystemPHs.Count - 1)]);
+					systemToUpdate.currentPower--;
+					// pick random other subsystem to deallocate from
+				}
+			}
+		}
 	}
 
 	public void AllocatePower(SubSystemPH subsystem)
