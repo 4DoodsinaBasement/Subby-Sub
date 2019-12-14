@@ -46,14 +46,9 @@ public class SubSystemPHManager : MonoBehaviour
 
 	// --- Testing --- //
 	[ContextMenu("Allocate From Generator To Steering")]
-	void AllocateFromGeneratorToSteering()
+	void DamageGeneratorBy10()
 	{
-		AllocatePower(steering);
-	}
-	[ContextMenu("Damage Steering By 10")]
-	void DamageSteeringBy10()
-	{
-		steering.currentHealth -= 10;
+		DamageSubsystem(generator, 10);
 	}
 	// --- Testing --- //
 
@@ -114,7 +109,6 @@ public class SubSystemPHManager : MonoBehaviour
 		while (damageRemaining > 0)
 		{
 			SubSystemPH subSystemToDamage = activeSubsystems[(int)Random.Range(0, subSystemPHs.Count)];
-
 			if (subSystemToDamage != null)
 			{
 				float damageToDeal = (damageRemaining >= damageGroupSize) ? damageGroupSize : damageRemaining;
@@ -141,6 +135,20 @@ public class SubSystemPHManager : MonoBehaviour
 		}
 	}
 
+	public void DamageSubsystem(SubSystemPH subSystemToDamage, float damage)
+	{
+		if (subSystemToDamage.currentHealth >= damage)
+		{
+			subSystemToDamage.currentHealth -= damage;
+		}
+		else
+		{
+			subSystemToDamage.currentHealth = 0;
+		}
+
+		// UpdateSystemPower(subSystemToDamage);
+	}
+
 	void UpdateSystemPower(SubSystemPH systemToUpdate)
 	{
 		if (systemToUpdate.name.ToLower() != "generator")
@@ -150,12 +158,13 @@ public class SubSystemPHManager : MonoBehaviour
 				DeallocatePower(systemToUpdate);
 			}
 		}
-		else
+		else // Update the Generator
 		{
 			int totalPowerAllocated = 0;
 			foreach (SubSystemPH item in subSystemPHs) { totalPowerAllocated += item.currentPower; }
 			while (systemToUpdate.currentPower + totalPowerAllocated > systemToUpdate.currentMaxPower)
 			{
+				Debug.Log("Please don't be infinite");
 				if (systemToUpdate.currentPower > 0)
 				{
 					systemToUpdate.currentPower--;
@@ -164,7 +173,6 @@ public class SubSystemPHManager : MonoBehaviour
 				{
 					DeallocatePower(subSystemPHs[(int)Random.Range(0, subSystemPHs.Count - 1)]);
 					systemToUpdate.currentPower--;
-					// pick random other subsystem to deallocate from
 				}
 			}
 		}
