@@ -45,7 +45,7 @@ public class SubSystemPHManager : MonoBehaviour
 
 
 	// --- Testing --- //
-	[ContextMenu("Allocate From Generator To Steering")]
+	[ContextMenu("Frustrate Nate and Caleb for generations to come")]
 	void DamageGeneratorBy10()
 	{
 		DamageSubsystem(generator, 10);
@@ -146,25 +146,38 @@ public class SubSystemPHManager : MonoBehaviour
 			subSystemToDamage.currentHealth = 0;
 		}
 
-		// UpdateSystemPower(subSystemToDamage);
+		UpdateSystemPower(subSystemToDamage);
 	}
 
 	void UpdateSystemPower(SubSystemPH systemToUpdate)
 	{
 		if (systemToUpdate.name.ToLower() != "generator")
 		{
+			int problem1 = 0;
 			while (systemToUpdate.currentPower != 0 && systemToUpdate.currentPower > systemToUpdate.currentMaxPower)
 			{
+				problem1++;
+				if (problem1 >= 100)
+				{
+					Debug.Log("Problem 1 went infinite!");
+					return;
+				}
 				DeallocatePower(systemToUpdate);
 			}
 		}
 		else // Update the Generator
 		{
-			int totalPowerAllocated = 0;
-			foreach (SubSystemPH item in subSystemPHs) { totalPowerAllocated += item.currentPower; }
-			while (systemToUpdate.currentPower + totalPowerAllocated > systemToUpdate.currentMaxPower)
+			int totalSubPower = 0;
+			foreach (SubSystemPH item in subSystemPHs) { totalSubPower += item.currentPower; }
+			Debug.Log("At the beginning, totalSubPower is " + totalSubPower);
+
+			int problem2 = 0;
+			while (/* systemToUpdate.currentPower +  */totalSubPower > systemToUpdate.currentMaxPower)
 			{
-				Debug.Log("Please don't be infinite");
+				problem2++;
+				if (problem2 >= 100) { Debug.Log("Problem 2 went infinite!"); return; }
+
+
 				if (systemToUpdate.currentPower > 0)
 				{
 					systemToUpdate.currentPower--;
@@ -174,6 +187,10 @@ public class SubSystemPHManager : MonoBehaviour
 					DeallocatePower(subSystemPHs[(int)Random.Range(0, subSystemPHs.Count - 1)]);
 					systemToUpdate.currentPower--;
 				}
+
+				totalSubPower = 0;
+				foreach (SubSystemPH item in subSystemPHs) { totalSubPower += item.currentPower; }
+				Debug.Log("Ran problem 2 once. totalSubPower = " + totalSubPower);
 			}
 		}
 	}
@@ -219,7 +236,7 @@ public class SubSystemPH
 		set
 		{
 			_currentHealth = value;
-			if (_currentHealth > maxHealth) { _currentHealth = maxHealth; }
+			if (_currentHealth > currentMaxHealth) { _currentHealth = currentMaxHealth; }
 			if (_currentHealth < 0) { _currentHealth = 0; }
 			currentMaxPower = (int)Mathf.Ceil((float)(maxPower) * (_currentHealth / maxHealth));
 		}
@@ -233,7 +250,7 @@ public class SubSystemPH
 		set
 		{
 			_currentPower = value;
-			if (_currentPower > maxPower) { _currentPower = maxPower; }
+			if (_currentPower > currentMaxPower) { _currentPower = currentMaxPower; }
 			if (_currentPower < 0) { _currentPower = 0; }
 		}
 	}
