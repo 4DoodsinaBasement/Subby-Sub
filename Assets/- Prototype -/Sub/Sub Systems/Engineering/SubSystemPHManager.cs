@@ -156,12 +156,7 @@ public class SubSystemPHManager : MonoBehaviour
 			int problem1 = 0;
 			while (systemToUpdate.currentPower != 0 && systemToUpdate.currentPower > systemToUpdate.currentMaxPower)
 			{
-				problem1++;
-				if (problem1 >= 100)
-				{
-					Debug.Log("Problem 1 went infinite!");
-					return;
-				}
+				if (problem1++ > 1000) { Debug.Log("Problem 1 went infinite!"); return; }
 				DeallocatePower(systemToUpdate);
 			}
 		}
@@ -169,13 +164,11 @@ public class SubSystemPHManager : MonoBehaviour
 		{
 			int totalSubPower = 0;
 			foreach (SubSystemPH item in subSystemPHs) { totalSubPower += item.currentPower; }
-			Debug.Log("At the beginning, totalSubPower is " + totalSubPower);
 
 			int problem2 = 0;
-			while (/* systemToUpdate.currentPower +  */totalSubPower > systemToUpdate.currentMaxPower)
+			while (totalSubPower > systemToUpdate.currentMaxPower)
 			{
-				problem2++;
-				if (problem2 >= 100) { Debug.Log("Problem 2 went infinite!"); return; }
+				if (problem2++ > 1000) { Debug.Log("Problem 2 went infinite!"); return; }
 
 
 				if (systemToUpdate.currentPower > 0)
@@ -190,7 +183,18 @@ public class SubSystemPHManager : MonoBehaviour
 
 				totalSubPower = 0;
 				foreach (SubSystemPH item in subSystemPHs) { totalSubPower += item.currentPower; }
-				Debug.Log("Ran problem 2 once. totalSubPower = " + totalSubPower);
+			}
+
+
+
+			int problem3 = 0;
+			while (systemToUpdate.currentPower < systemToUpdate.currentMaxPower - totalSubPower + systemToUpdate.currentPower)
+			{
+				if (problem3++ > 1000) { Debug.Log("Problem 3 went infinite!"); return; }
+
+				systemToUpdate.currentPower++;
+				totalSubPower = 0;
+				foreach (SubSystemPH item in subSystemPHs) { totalSubPower += item.currentPower; }
 			}
 		}
 	}
@@ -219,6 +223,11 @@ public class SubSystemPHManager : MonoBehaviour
 		else
 		{
 			systemToRepair.currentHealth += amount;
+
+			if (systemToRepair.name.ToLower() == "generator")
+			{
+				UpdateSystemPower(systemToRepair);
+			}
 		}
 	}
 }
