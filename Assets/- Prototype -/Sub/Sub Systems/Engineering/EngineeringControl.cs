@@ -4,7 +4,88 @@ using UnityEngine;
 
 public class EngineeringControl : SubsystemTemplate
 {
+	void Update()
+	{
+		// engineering
+		if (Input.GetKeyDown(KeyCode.A))
+		{
+			manager.subPHMmanager.AllocatePower(manager.subPHMmanager.engineering);
+		}
+		if (Input.GetKeyDown(KeyCode.Z))
+		{
+			manager.subPHMmanager.DeallocatePower(manager.subPHMmanager.engineering);
+		}
 
+		// steering
+		if (Input.GetKeyDown(KeyCode.S))
+		{
+			manager.subPHMmanager.AllocatePower(manager.subPHMmanager.steering);
+		}
+		if (Input.GetKeyDown(KeyCode.X))
+		{
+			manager.subPHMmanager.DeallocatePower(manager.subPHMmanager.steering);
+		}
+
+		// throttle
+		if (Input.GetKeyDown(KeyCode.D))
+		{
+			manager.subPHMmanager.AllocatePower(manager.subPHMmanager.throttle);
+		}
+		if (Input.GetKeyDown(KeyCode.C))
+		{
+			manager.subPHMmanager.DeallocatePower(manager.subPHMmanager.throttle);
+		}
+
+		// buoyancy
+		if (Input.GetKeyDown(KeyCode.F))
+		{
+			manager.subPHMmanager.AllocatePower(manager.subPHMmanager.buoyancy);
+		}
+		if (Input.GetKeyDown(KeyCode.V))
+		{
+			manager.subPHMmanager.DeallocatePower(manager.subPHMmanager.buoyancy);
+		}
+
+		// sonar
+		if (Input.GetKeyDown(KeyCode.G))
+		{
+			manager.subPHMmanager.AllocatePower(manager.subPHMmanager.sonar);
+		}
+		if (Input.GetKeyDown(KeyCode.B))
+		{
+			manager.subPHMmanager.DeallocatePower(manager.subPHMmanager.sonar);
+		}
+
+		// lights
+		if (Input.GetKeyDown(KeyCode.H))
+		{
+			manager.subPHMmanager.AllocatePower(manager.subPHMmanager.lights);
+		}
+		if (Input.GetKeyDown(KeyCode.N))
+		{
+			manager.subPHMmanager.DeallocatePower(manager.subPHMmanager.lights);
+		}
+
+		// lazor1
+		if (Input.GetKeyDown(KeyCode.J))
+		{
+			manager.subPHMmanager.AllocatePower(manager.subPHMmanager.lazor1);
+		}
+		if (Input.GetKeyDown(KeyCode.M))
+		{
+			manager.subPHMmanager.DeallocatePower(manager.subPHMmanager.lazor1);
+		}
+
+		// lazor2
+		if (Input.GetKeyDown(KeyCode.K))
+		{
+			manager.subPHMmanager.AllocatePower(manager.subPHMmanager.lazor2);
+		}
+		if (Input.GetKeyDown(KeyCode.Comma))
+		{
+			manager.subPHMmanager.DeallocatePower(manager.subPHMmanager.lazor2);
+		}
+	}
 
 
 	public override void LeftStickX(float value) { }

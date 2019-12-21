@@ -45,15 +45,10 @@ public class SubSystemPHManager : MonoBehaviour
 
 
 	// --- Testing --- //
-	[ContextMenu("Allocate From Generator To Steering")]
-	void AllocateFromGeneratorToSteering()
+	[ContextMenu("Frustrate Nate and Caleb for generations to come")]
+	void DamageGeneratorBy10()
 	{
-		AllocatePower(steering);
-	}
-	[ContextMenu("Damage Steering By 10")]
-	void DamageSteeringBy10()
-	{
-		steering.currentHealth -= 10;
+		DamageSubsystem(generator, 10);
 	}
 	// --- Testing --- //
 
@@ -114,7 +109,6 @@ public class SubSystemPHManager : MonoBehaviour
 		while (damageRemaining > 0)
 		{
 			SubSystemPH subSystemToDamage = activeSubsystems[(int)Random.Range(0, subSystemPHs.Count)];
-
 			if (subSystemToDamage != null)
 			{
 				float damageToDeal = (damageRemaining >= damageGroupSize) ? damageGroupSize : damageRemaining;
@@ -130,12 +124,77 @@ public class SubSystemPHManager : MonoBehaviour
 					activeSubsystems.Remove(subSystemToDamage);
 				}
 
+				UpdateSystemPower(subSystemToDamage);
 				damageRemaining -= damageToDeal;
 			}
 			else
 			{
 				Debug.Log("There was " + damageRemaining + " damage remaining and YOU DIED!");
 				break;
+			}
+		}
+	}
+
+	public void DamageSubsystem(SubSystemPH subSystemToDamage, float damage)
+	{
+		if (subSystemToDamage.currentHealth >= damage)
+		{
+			subSystemToDamage.currentHealth -= damage;
+		}
+		else
+		{
+			subSystemToDamage.currentHealth = 0;
+		}
+
+		UpdateSystemPower(subSystemToDamage);
+	}
+
+	void UpdateSystemPower(SubSystemPH systemToUpdate)
+	{
+		if (systemToUpdate.name.ToLower() != "generator")
+		{
+			int problem1 = 0;
+			while (systemToUpdate.currentPower != 0 && systemToUpdate.currentPower > systemToUpdate.currentMaxPower)
+			{
+				if (problem1++ > 1000) { Debug.Log("Problem 1 went infinite!"); return; }
+				DeallocatePower(systemToUpdate);
+			}
+		}
+		else // Update the Generator
+		{
+			int totalSubPower = 0;
+			foreach (SubSystemPH item in subSystemPHs) { totalSubPower += item.currentPower; }
+
+			int problem2 = 0;
+			while (totalSubPower > systemToUpdate.currentMaxPower)
+			{
+				if (problem2++ > 1000) { Debug.Log("Problem 2 went infinite!"); return; }
+
+
+				if (systemToUpdate.currentPower > 0)
+				{
+					systemToUpdate.currentPower--;
+				}
+				else
+				{
+					DeallocatePower(subSystemPHs[(int)Random.Range(0, subSystemPHs.Count - 1)]);
+					systemToUpdate.currentPower--;
+				}
+
+				totalSubPower = 0;
+				foreach (SubSystemPH item in subSystemPHs) { totalSubPower += item.currentPower; }
+			}
+
+
+
+			int problem3 = 0;
+			while (systemToUpdate.currentPower < systemToUpdate.currentMaxPower - totalSubPower + systemToUpdate.currentPower)
+			{
+				if (problem3++ > 1000) { Debug.Log("Problem 3 went infinite!"); return; }
+
+				systemToUpdate.currentPower++;
+				totalSubPower = 0;
+				foreach (SubSystemPH item in subSystemPHs) { totalSubPower += item.currentPower; }
 			}
 		}
 	}
@@ -164,6 +223,11 @@ public class SubSystemPHManager : MonoBehaviour
 		else
 		{
 			systemToRepair.currentHealth += amount;
+
+			if (systemToRepair.name.ToLower() == "generator")
+			{
+				UpdateSystemPower(systemToRepair);
+			}
 		}
 	}
 }
@@ -174,28 +238,28 @@ public class SubSystemPH
 	public string name;
 
 	[ReadOnly] public float maxHealth;
-	[HideInInspector] public float currentMaxHealth;
+	[ReadOnly] public float currentMaxHealth;
 	[SerializeField] [ReadOnly] private float _currentHealth; public float currentHealth
 	{
 		get { return _currentHealth; }
 		set
 		{
-			currentMaxPower = (int)Mathf.Ceil((float)(maxPower) * (value / maxHealth));
 			_currentHealth = value;
-			if (_currentHealth > maxHealth) { _currentHealth = maxHealth; }
+			if (_currentHealth > currentMaxHealth) { _currentHealth = currentMaxHealth; }
 			if (_currentHealth < 0) { _currentHealth = 0; }
+			currentMaxPower = (int)Mathf.Ceil((float)(maxPower) * (_currentHealth / maxHealth));
 		}
 	}
 
 	[ReadOnly] public int maxPower;
-	[HideInInspector] public int currentMaxPower;
+	[ReadOnly] public int currentMaxPower;
 	[SerializeField] [ReadOnly] private int _currentPower; public int currentPower
 	{
 		get { return _currentPower; }
 		set
 		{
 			_currentPower = value;
-			if (_currentPower > maxPower) { _currentPower = maxPower; }
+			if (_currentPower > currentMaxPower) { _currentPower = currentMaxPower; }
 			if (_currentPower < 0) { _currentPower = 0; }
 		}
 	}

@@ -10,7 +10,7 @@ public class SubsystemManager : MonoBehaviour
 	[ReadOnly] public SubController subToManage;
 	[ReadOnly] public SubSystemPHManager subPHMmanager;
 
-	void Start()
+	void Awake()
 	{
 		subToManage = transform.parent.GetComponent<SubController>();
 		if (subToManage == null)

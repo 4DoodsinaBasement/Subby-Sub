@@ -20,7 +20,7 @@ public class RepairControl : SubsystemTemplate
 		if (systemToRepair != null)
 		{
 			systemToRepair = systemToRepair.ToLower();
-			if (systemToRepair != "repair" && leftHalf && rightHalf)
+			if (systemToRepair != "repair" /* && leftHalf */ && rightHalf)
 			{
 				foreach (SubSystemPH item in manager.subPHMmanager.subSystemPHs)
 				{
