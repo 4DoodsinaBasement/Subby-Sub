@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-
-public class ReadOnlyAttribute : PropertyAttribute {}
-
 [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
 public class ReadOnlyProperty : PropertyDrawer
 {
